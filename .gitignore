@@ -1,0 +1,34 @@
+# Cartelle di output del sampler (chain MCMC pesanti)
+test/
+test_sim/
+test_DR2newplus/
+test_DR2newplus_6par/
+spna_J1640/
+
+# Dataset e framework esterni (pesanti, non tuo codice)
+dati/
+sim_data_noise/
+J1640+2224/
+Materiale PTA/
+discovery_new/
+
+# Checkpoint automatici di Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+ipynb_checkpoints-*/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Sistema Mac
+.DS_Store
+
+# File dati pesanti
+*.feather
+*.h5
+*.hdf5
+
+# Chain MCMC (per sicurezza, ovunque siano)
+chain_*.txt
