@@ -32,3 +32,23 @@ __pycache__/
 
 # Chain MCMC (per sicurezza, ovunque siano)
 chain_*.txt
+
+# Nuove cartelle di output e dati simulati (settembre)
+test_sim2/
+test_sim_gwb/
+test_sim_gwb_A145/
+test_sim_gwb_A155/
+test_sim_gwb_swap_A145/
+test_sim_gwb_swap_A145alpha/
+test_sim_gwb_A140_g27/
+test_sim_sv44/
+test_sim_sv44_alpha44/
+test_sim_sv44_alphafree/
+sim_data_noise2/
+sim_data_noiseGWB/
+sim_data_noiseGWB_A145/
+sim_data_noiseGWB_A155/
+sim_data_noiseGWB_swap_A145/
+sim_data_noiseGWBprova/
+sim_data_noiseGWB_A140_g27/
+sim_data_noise_sv44/
