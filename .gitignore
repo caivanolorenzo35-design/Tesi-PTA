@@ -52,3 +52,27 @@ sim_data_noiseGWB_swap_A145/
 sim_data_noiseGWBprova/
 sim_data_noiseGWB_A140_g27/
 sim_data_noise_sv44/
+
+# Ottobre: dati simulati e output delle run con alpha libero
+sim_data_noiseGWB_A140_g433/
+sim_data_noiseGWB_A140_g433_sv44/
+sim_data_noiseGWB_A1405_g433_sv44/
+test_real_sv44/
+test_sim_gwb_A140_g433/
+test_gwb_A140_g433_sv44/
+test_gwb_A140_sv44_alphafree/
+test_gwb_A1405_sv44_alphafree/
+test_sim_sv44_alphafree_ws/
+test_gwb_A140_sv44_alphafree_ws/
+
+# Ottobre: dati simulati e output delle run con alpha libero
+sim_data_noiseGWB_A140_g433/
+sim_data_noiseGWB_A140_g433_sv44/
+sim_data_noiseGWB_A1405_g433_sv44/
+test_real_sv44/
+test_sim_gwb_A140_g433/
+test_gwb_A140_g433_sv44/
+test_gwb_A140_sv44_alphafree/
+test_gwb_A1405_sv44_alphafree/
+test_sim_sv44_alphafree_ws/
+test_gwb_A140_sv44_alphafree_ws/
