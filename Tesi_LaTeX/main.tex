@@ -1,0 +1,143 @@
+%========================================================================================
+%  TESI TRIENNALE — Lorenzo Caivano
+%  File principale: compila SEMPRE questo file (VS Code + LaTeX Workshop lo fa da solo).
+%  Il testo vero sta nei file della cartella Capitoli/ — qui ci sono solo impostazioni,
+%  frontespizio e l'elenco dei capitoli.
+%========================================================================================
+
+\PassOptionsToPackage{italian}{babel}   % il template carica babel senza lingua: gliela passiamo qui
+\documentclass[12pt, oneside]{MastersDoctoralThesis}
+% 12pt      = dimensione del font
+% oneside   = stampa solo fronte (margini uguali a destra e sinistra)
+% (la riga \PassOptionsToPackage sopra mette "Indice", "Capitolo", "Figura", "Bibliografia" in italiano)
+
+\usepackage[utf8]{inputenc}   % lettere accentate scritte direttamente (è, à, ...)
+\usepackage[T1]{fontenc}
+
+%----------------------------------------------------------------------------------------
+%	PACCHETTI
+%----------------------------------------------------------------------------------------
+\usepackage{graphicx}         % \includegraphics
+\usepackage{float}            % opzione [H] per fissare le figure
+\usepackage{subcaption}       % sotto-figure (a), (b)
+\usepackage{amsmath, amssymb, amsfonts, mathrsfs, dsfont}
+\usepackage{upgreek}          % lettere greche dritte: \upmu, \uprho
+\usepackage{bm}               % vettori in grassetto: \bm{x}
+\usepackage[numbers,sort&compress]{natbib} % citazioni numeriche [1,2,5-7]
+\usepackage{hyperref}         % link cliccabili in indice, equazioni, citazioni
+
+%----------------------------------------------------------------------------------------
+%	SCORCIATOIE (le stesse del template + alcune per la tesi)
+%----------------------------------------------------------------------------------------
+\newcommand{\nn}{\nonumber}
+\newcommand{\vs}{\vspace{12pt}}
+\newcommand{\nd}{\noindent}
+
+\newcommand{\dd}{\mathrm{d}}                       % d dritta nei differenziali
+\newcommand{\Msun}{\mathrm{M}_\odot}               % massa solare
+\newcommand{\fyr}{f_{\mathrm{yr}}}                 % frequenza di riferimento 1/anno
+\newcommand{\Agwb}{A_{\mathrm{GWB}}}               % ampiezza del GWB
+\newcommand{\gammagwb}{\gamma_{\mathrm{GWB}}}      % indice spettrale del GWB
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}} % promemoria rossi nel PDF
+
+% Nome della sezione ringraziamenti in italiano (il template lo definisce solo in inglese)
+\providecaptionname{italian}{\acknowledgementname}{Ringraziamenti}
+
+%----------------------------------------------------------------------------------------
+%	MARGINI
+%----------------------------------------------------------------------------------------
+\geometry{
+	paper=a4paper,
+	inner=2.5cm,
+	outer=3.0cm,
+	bindingoffset=1.5cm,
+	top=2.2cm,
+	bottom=2.2cm,
+}
+
+%----------------------------------------------------------------------------------------
+%	VELOCIZZARE LA COMPILAZIONE (facoltativo)
+%   Togli il % e lascia solo i capitoli su cui stai lavorando: LaTeX compila solo quelli,
+%   ma mantiene numerazione e riferimenti degli altri.
+%----------------------------------------------------------------------------------------
+% \includeonly{Capitoli/Capitolo1_OndeGravitazionali}
+
+\begin{document}
+
+\hypersetup{urlcolor=black, linkcolor=black, citecolor=black}
+
+\frontmatter
+\pagestyle{plain}
+
+%----------------------------------------------------------------------------------------
+%	FRONTESPIZIO
+%----------------------------------------------------------------------------------------
+\begin{titlepage}
+    \begin{center}
+        {\LARGE Università degli Studi di Milano-Bicocca \\}
+        \vspace*{2mm}
+        {Dipartimento di Fisica ``G.~Occhialini''}\\
+        \vspace*{1mm}
+        {Corso di Laurea Triennale in Fisica}
+    \end{center}
+
+    \vspace*{1.5cm}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.4\textwidth]{Figure/logo.png}
+    \end{figure}
+
+    \vspace*{1cm}
+
+    \begin{center}
+        {\Huge Studio delle degenerazioni nell'analisi del rumore delle pulsar}
+    \end{center}
+
+    \vspace*{3.5cm}
+
+    \centering
+    {
+    \begin{minipage}[t]{0.47\textwidth}
+        {\large{\bf Relatore:\\ Prof. Alberto Sesana}}\\[4mm]
+        {\large{\bf Correlatrice:\\ Dott.ssa Irene Ferranti}}
+    \end{minipage}\hfill\begin{minipage}[t]{0.47\textwidth}\raggedleft
+        {\large{\bf Candidato:\\ Lorenzo Caivano\\ Matricola: XXXXXX}} % <-- inserisci la tua matricola
+    \end{minipage}
+    }
+
+    \vfill
+    \centering{\large{\bf ANNO ACCADEMICO 2025/2026}}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	INDICE
+%----------------------------------------------------------------------------------------
+\tableofcontents
+
+%----------------------------------------------------------------------------------------
+%	CAPITOLI
+%----------------------------------------------------------------------------------------
+\mainmatter
+\pagestyle{thesis}
+
+\include{Capitoli/Introduzione}
+\include{Capitoli/Capitolo1_OndeGravitazionali}
+\include{Capitoli/Capitolo2_PTA}
+\include{Capitoli/Capitolo3_Rumore}
+\include{Capitoli/Capitolo4_Inferenza}
+\include{Capitoli/Capitolo5_Validazione}
+\include{Capitoli/Capitolo6_Degenerazioni}
+\include{Capitoli/Conclusioni}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAFIA (le voci stanno in references.bib)
+%----------------------------------------------------------------------------------------
+\bibliographystyle{unsrtnat}   % ordine di citazione, con DOI e link arXiv
+\bibliography{references}
+
+% \begin{acknowledgements}
+%     ...
+% \end{acknowledgements}
+
+\end{document}

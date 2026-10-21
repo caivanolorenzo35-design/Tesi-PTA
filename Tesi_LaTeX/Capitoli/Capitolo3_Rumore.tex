@@ -1,0 +1,42 @@
+%========================================================================================
+%  CAPITOLO 3 — IL MODELLO DI RUMORE DI UNA PULSAR
+%  Obiettivo: descrivere tutte le componenti del modello usato nelle analisi.
+%  Lunghezza indicativa: 5-6 pagine.
+%  Fonti: Taylor (2021) cap. 7, Shaifullah (2025) sez. 3, EPTA DR2 paper II (EPTA2023_noise),
+%         Lentati et al. (2016), tesi di Irene sez. 2.1.
+%========================================================================================
+
+\chapter{Il modello di rumore di una pulsar} \label{chpt:rumore}
+\sloppy
+
+% Intro: i residui = segnale + rumore; il rumore si divide in bianco e rosso; il rosso si
+% divide in acromatico e cromatico. Tabella riassuntiva dei 6 parametri usati in tesi.
+
+\section{Rumore bianco} \label{sec:rumore_bianco}
+% - Incertezza radiometrica sui TOA, jitter.
+% - Parametri per backend: EFAC (riscala le barre d'errore), EQUAD/TNEQUAD (aggiunge in
+%   quadratura), ECORR (correlato tra TOA della stessa osservazione).
+% - Formula: sigma^2 = EFAC^2 * (sigma_TOA^2 + EQUAD^2).
+% - Nella tesi: fissati ai valori del noisedict (marginalizzati separatamente).
+
+\section{Rumore rosso acromatico} \label{sec:rumore_rosso}
+% - Spin noise: irregolarità della rotazione. Non dipende dalla frequenza radio.
+% - Legge di potenza P(f) = A^2/(12 pi^2) (f/fyr)^(-gamma) fyr^(-3)
+%   -> stessa forma del GWB (Eq. psd_gwb)! Parametri: red_noise_log10_A, red_noise_gamma.
+
+\section{Rumore cromatico: dispersione e scattering} \label{sec:rumore_cromatico}
+% - Variazioni di DM nel tempo (moto relativo pulsar-Terra-ISM): ritardo prop. a nu^-2.
+%   Parametri: dm_gp_log10_A, dm_gp_gamma.
+% - Scattering nel mezzo interstellare: ritardo prop. a nu^-alpha, alpha = 4 (spettro di
+%   Kolmogorov darebbe 4.4). Parametri: sv_gp_log10_A, sv_gp_gamma (+ sv_gp_alpha se libero).
+% - Perché serve una buona copertura in frequenza radio (Ferranti2025).
+
+\section{Processi gaussiani e base di Fourier} \label{sec:GP}
+% - Ogni processo rosso scritto come somma di seni e coseni alle frequenze k/T,
+%   k = 1..N, con coefficienti gaussiani di varianza data dalla PSD.
+% - Per i processi cromatici la base è moltiplicata per (nu/nu_ref)^(-alpha).
+% - Numero di componenti di Fourier per J1640+2224 (dal noisedict di DR2low).
+% - Figura: PSD delle tre componenti + white noise per J1640 (stile Irene fig. 2.7).
+
+\section{Riepilogo del modello} \label{sec:riepilogo_modello}
+% Tabella: componente | dipendenza da nu | parametri | prior.

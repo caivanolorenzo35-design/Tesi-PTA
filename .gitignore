@@ -77,3 +77,17 @@ test_gwb_A1405_sv44_alphafree/
 test_sim_sv44_alphafree_ws/
 test_gwb_A140_sv44_alphafree_ws/
 test_gwb_A1405_sv44_alphafree_ws/
+
+# 20 ottobre: fit con alpha libero sui dati reali (notebook 15)
+test_real_alphafree/
+test_real_alphafree_ws/
+
+# 20 ottobre: simulazioni con band noise (il feather si chiama J1640+2224, senza estensione,
+# quindi *.feather non lo intercetta e la cartella va elencata)
+sim_data_noise_bn_*/
+
+# 21 ottobre: output delle analisi con band noise (notebook 16, 17, 18)
+test_sim_bn_*/
+
+# 21 ottobre: output dell analisi con band noise nel modello sui dati reali (notebook 20)
+test_real_bn_*/

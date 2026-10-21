@@ -1,0 +1,27 @@
+%========================================================================================
+%  CAPITOLO 4 — INFERENZA BAYESIANA E STRUMENTI DI ANALISI
+%  Lunghezza indicativa: 5-6 pagine.
+%  Fonti: Thrane & Talbot (2019), Taylor (2021) cap. 5-7, tesi di Irene cap. 3 (impostazione).
+%========================================================================================
+
+\chapter{Inferenza bayesiana e strumenti di analisi} \label{chpt:inferenza}
+\sloppy
+
+\section{Teorema di Bayes, likelihood e prior} \label{sec:bayes}
+% - Posterior = likelihood x prior / evidenza. Marginalizzazione. Intervalli di credibilità.
+
+\section{La likelihood per il pulsar timing} \label{sec:likelihood_PTA}
+% - Residui gaussiani: r = M eps + F a + n.
+% - Likelihood marginalizzata sui coefficienti: ln L = -1/2 r^T C^-1 r - 1/2 ln det(2 pi C),
+%   C = N + T B T^T (formula di Woodbury per l'inversione).
+
+\section{Campionamento: Markov Chain Monte Carlo} \label{sec:MCMC}
+% - Metropolis-Hastings, PTMCMC (parallel tempering, salti adattivi).
+% - Impostazioni usate: Niter = 1e6, thin = 10, burn-in 25%, ~1e5 campioni.
+% - Convergenza: tempo di autocorrelazione (emcee), corner plot.
+
+\section{Enterprise e Discovery} \label{sec:enterprise_discovery}
+% - Enterprise: standard della comunità (Python/NumPy).
+% - Discovery: nuova implementazione in JAX, differenziabile, GPU, compilazione JIT.
+% - Perché è importante validarla -> capitolo 5.
+% - Workstation di dipartimento (GPU) per i run lunghi.

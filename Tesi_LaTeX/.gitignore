@@ -1,0 +1,13 @@
+# File ausiliari di LaTeX (si rigenerano a ogni compilazione)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.synctex(busy)

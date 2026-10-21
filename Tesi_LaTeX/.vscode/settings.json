@@ -1,0 +1,20 @@
+{
+    // Compilazione con LaTeX Workshop: latexmk gestisce da solo pdflatex + bibtex
+    "latex-workshop.latex.recipes": [
+        { "name": "latexmk (pdf)", "tools": ["latexmk"] }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "-pdf", "-outdir=%OUTDIR%", "%DOC%"],
+            "env": {}
+        }
+    ],
+    // Compila sempre main.tex, anche se stai modificando un capitolo
+    "latex-workshop.latex.rootFile.doNotPrompt": true,
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoClean.run": "never",
+    "cSpell.enabled": false
+}
