@@ -1,152 +1,207 @@
-%========================================================================================
-%  CAPITOLO 1 — ONDE GRAVITAZIONALI
-%  Obiettivo: arrivare, partendo dalla relatività generale, al fondo stocastico di onde
-%  gravitazionali (GWB) e al suo spettro a legge di potenza con gamma = 13/3, che è
-%  il segnale che useremo nelle iniezioni dei capitoli 5-6.
-%  Lunghezza indicativa: 5-6 pagine.
-%  Fonti principali: Maggiore vol. 1 e 2, Taylor (2021) cap. 2 e 4, Shaifullah (2025) sez. 4.
-%========================================================================================
+% !TEX root = ../main.tex
+\chapter{Gravitational waves} \label{chpt:GW}
 
-\chapter{Onde gravitazionali} \label{chpt:GW}
-\sloppy
+    \section{Gravitational waves in linearized general relativity}
 
-Le onde gravitazionali sono perturbazioni dello spaziotempo che si propagano alla velocità della luce, generate da masse in moto accelerato. Previste da Einstein già nel 1916 come soluzioni ondulatorie delle equazioni di campo linearizzate~\cite{Einstein1916, Einstein1918}, sono state osservate per la prima volta in modo indiretto attraverso il decadimento orbitale della pulsar binaria PSR B1913+16~\cite{HulseTaylor1975, TaylorWeisberg1982} e, un secolo dopo la loro previsione, in modo diretto dagli interferometri LIGO e Virgo, con la rivelazione del segnale GW150914 emesso dalla coalescenza di due buchi neri di massa stellare~\cite{LIGO2016}.
+    In general relativity, the geometry of spacetime, described by the metric
+    $g_{\mu\nu}$, is related to the distribution of matter and energy through
+    Einstein's field equations:
+    \begin{equation}
+        G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2} R\, g_{\mu\nu} = 8\pi\, T_{\mu\nu} \, ,
+        \label{eq:einstein}
+    \end{equation}
+    where $G_{\mu\nu}$ is the Einstein tensor, $R_{\mu\nu} \equiv R^{\lambda}{}_{\mu\lambda\nu}$
+    is the Ricci tensor,
+    $R = g^{\mu\nu} R_{\mu\nu}$ is the Ricci scalar, and $T_{\mu\nu}$ is the
+    stress-energy tensor~\cite{Maggiore2008}.
 
-In questo capitolo richiamo gli elementi di teoria necessari per il resto della tesi: la descrizione delle onde gravitazionali in relatività generale linearizzata (Sezione~\ref{sec:GW_linearizzata}), la loro emissione da parte di sistemi binari (Sezione~\ref{sec:GW_binarie}) e il fondo stocastico prodotto dalla popolazione cosmica di binarie di buchi neri supermassicci (Sezione~\ref{sec:GWB}), che è il segnale cercato dai \textit{Pulsar Timing Array}.
+    In the weak-field limit, the metric can be
+    written as a small perturbation of the flat Minkowski spacetime:
+    \begin{equation}
+        g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\, , \qquad |h_{\mu\nu}| \ll 1\, ,
+        \label{eq:metrica_perturbata}
+    \end{equation}
+    where $\eta_{\mu\nu} = \mathrm{diag}(-1, 1, 1, 1)$ is the Minkowski metric and
+    $h_{\mu\nu}$ is a small tensor perturbation of the metric. To first order in
+    $h_{\mu\nu}$, indices are raised and lowered with $\eta_{\mu\nu}$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Onde gravitazionali in relatività generale linearizzata} \label{sec:GW_linearizzata}
+    We introduce the trace-reversed perturbation
+    \begin{equation}
+        \bar h_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} h \, ,
+        \qquad h = \eta^{\mu\nu}h_{\mu\nu}\, .
+        \label{eq:trace_reversed}
+    \end{equation}
+    Expanding the Einstein tensor to first order in $h_{\mu\nu}$ and using the
+    Lorenz gauge $\partial^{\mu}\bar h_{\mu\nu} = 0$, the field equations become
+    \begin{equation}
+        \Box\, \bar h_{\mu\nu} = -16\pi\, T_{\mu\nu}\, ,
+        \label{eq:einstein_linearizzata}
+    \end{equation}
+    where $\Box = \eta^{\mu\nu}\partial_\mu\partial_\nu$ is the flat-space d'Alembert operator.
 
-In relatività generale la geometria dello spaziotempo, descritta dalla metrica $g_{\mu\nu}$, è legata al contenuto di materia ed energia dalle equazioni di campo di Einstein
+    Far from the source, Eq.~\eqref{eq:einstein_linearizzata} becomes
+    \begin{equation}
+        \Box\, \bar h_{\mu\nu} = 0\, ,
+        \label{eq:onde_vuoto}
+    \end{equation}
+    which is a wave equation whose solutions propagate at the speed of light.
+
+    In vacuum, the residual gauge freedom can also be used to impose the
+    transverse-traceless (TT) gauge, defined by
 \begin{equation}
-    G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2} R\, g_{\mu\nu} = \frac{8\pi G}{c^4}\, T_{\mu\nu} \, ,
-    \label{eq:einstein}
-\end{equation}
-dove $R_{\mu\nu}$ e $R$ sono il tensore e lo scalare di Ricci e $T_{\mu\nu}$ è il tensore energia-impulso. Queste equazioni sono non lineari, ma lontano dalle sorgenti il campo gravitazionale è debole e si può scrivere la metrica come una piccola perturbazione dello spaziotempo piatto di Minkowski~\cite{Maggiore2008}:
-\begin{equation}
-    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\, , \qquad |h_{\mu\nu}| \ll 1 \, ,
-    \label{eq:metrica_perturbata}
-\end{equation}
-con $\eta_{\mu\nu} = \mathrm{diag}(-1, 1, 1, 1)$. Sviluppando le equazioni~\eqref{eq:einstein} al primo ordine in $h_{\mu\nu}$ e introducendo la perturbazione a traccia invertita $\bar{h}_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} h$ (con $h = \eta^{\mu\nu}h_{\mu\nu}$), si può sfruttare la libertà di scelta delle coordinate per imporre la condizione di gauge di Lorenz $\partial^{\nu}\bar{h}_{\mu\nu} = 0$. In questa gauge le equazioni di campo linearizzate diventano
-\begin{equation}
-    \Box\, \bar{h}_{\mu\nu} = -\frac{16\pi G}{c^4}\, T_{\mu\nu}\, ,
-    \label{eq:einstein_linearizzata}
-\end{equation}
-dove $\Box = \eta^{\mu\nu}\partial_\mu\partial_\nu$ è l'operatore di d'Alembert. Nel vuoto ($T_{\mu\nu}=0$) la~\eqref{eq:einstein_linearizzata} si riduce a un'equazione delle onde, $\Box\,\bar{h}_{\mu\nu} = 0$: le perturbazioni della metrica si propagano come onde alla velocità della luce.
-
-Non tutte le componenti di $\bar{h}_{\mu\nu}$ sono però fisiche. Dei 10 gradi di libertà di un tensore simmetrico $4\times4$, la gauge di Lorenz ne elimina 4; la libertà residua di trasformazione delle coordinate ne elimina altri 4. Si può allora scegliere la cosiddetta gauge \textit{transverse-traceless} (TT), definita dalle condizioni~\cite{Maggiore2008}
-\begin{equation}
-    h_{0\mu} = 0\, , \qquad h^{i}{}_{i} = 0 \, , \qquad \partial^{j} h_{ij} = 0 \, ,
+    h_{0\mu} = 0\, , \qquad h^{i}{}_{i} = 0\, , \qquad \partial^{j} h_{ij} = 0\, .
     \label{eq:gauge_TT}
 \end{equation}
-in cui restano soltanto 2 gradi di libertà, che corrispondono alle due polarizzazioni dell'onda. Per un'onda piana monocromatica di pulsazione $\omega$ che si propaga lungo l'asse $z$ si ha
+In the TT gauge the perturbation is traceless, so that $\bar h_{\mu\nu} = h_{\mu\nu}$.
+For a monochromatic plane wave travelling along the $z$-axis, the solution then takes the form
 \begin{equation}
-    h_{ij}^{\mathrm{TT}}(t,z) =
+    h_{\mu\nu}^{\mathrm{TT}}(t,z) =
     \begin{pmatrix}
-        h_+ & h_\times & 0 \\
-        h_\times & -h_+ & 0 \\
-        0 & 0 & 0
+        0 & 0 & 0 & 0 \\
+        0 & h_+ & h_\times & 0 \\
+        0 & h_\times & -h_+ & 0 \\
+        0 & 0 & 0 & 0
     \end{pmatrix}
-    \cos\!\left[\omega\left(t - \frac{z}{c}\right)\right] ,
+    \cos\left[\omega(t - z)\right] .
     \label{eq:onda_piana_TT}
 \end{equation}
-dove $h_+$ e $h_\times$ sono le ampiezze delle polarizzazioni ``più'' e ``per''. L'onda è quindi \textit{trasversale}: agisce solo nel piano perpendicolare alla direzione di propagazione.
 
-L'effetto fisico di un'onda gravitazionale è una deformazione di marea delle distanze proprie. Due masse di prova libere poste a distanza $L$ lungo l'asse $x$ vedono la loro distanza propria oscillare di
-\begin{equation}
-    \frac{\delta L}{L} \simeq \frac{1}{2}\, h_{xx}^{\mathrm{TT}} = \frac{1}{2}\, h_+ \cos(\omega t)\, ,
-    \label{eq:strain}
-\end{equation}
-motivo per cui l'ampiezza $h$ di un'onda gravitazionale è chiamata \textit{strain}. La polarizzazione $+$ allunga le distanze lungo $x$ mentre le contrae lungo $y$ (e viceversa mezzo periodo dopo); la polarizzazione $\times$ produce lo stesso effetto ruotato di $45^\circ$ (Figura~\ref{fig:polarizzazioni}).
+Here $h_+$ and $h_\times$ are the amplitudes of the two independent
+polarizations of the wave: as for electromagnetic waves, only two polarization
+states are allowed. Since all the $t$ and $z$ components are zero, the wave
+only acts on the plane perpendicular to its direction of propagation. The $+$
+polarization stretches distances along the $x$-axis while compressing them along
+the $y$-axis (and vice versa half a period later), whereas the $\times$
+polarization produces the same deformation rotated by $45^\circ$.
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[width=0.8\textwidth]{Figure/cap1/polarizzazioni.pdf}
-    \fbox{\parbox{0.8\textwidth}{\centering\vspace{1.5cm}\TODO{figura: anello di masse di prova deformato dalle polarizzazioni $+$ e $\times$}\vspace{1.5cm}}}
-    \caption{\footnotesize Effetto delle due polarizzazioni di un'onda gravitazionale che si propaga lungo $z$ su un anello di masse di prova nel piano $xy$, nell'arco di un periodo.}
+    \includegraphics[width=0.8\textwidth]{Figure/cap1/polarizzazioni.pdf}
+    \caption{\footnotesize Deformation of a ring of test masses in the $xy$ plane
+    over one period, for a gravitational wave propagating along $z$ with
+        polarization $+$ (top) and $\times$ (bottom).}
     \label{fig:polarizzazioni}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Emissione di onde gravitazionali da sistemi binari} \label{sec:GW_binarie}
 
-\subsection{La formula di quadrupolo}
 
-Risolvendo la~\eqref{eq:einstein_linearizzata} lontano da una sorgente non relativistica, il termine dominante della radiazione emessa è proporzionale alla derivata seconda del momento di quadrupolo della distribuzione di massa~\cite{Maggiore2008}:
+\section{Gravitational waves from binary systems} \label{sec:GW_binarie}
+
+As in electromagnetism, the radiation field of a source can be expanded in
+multipoles. We consider a source far from the observer and moving slowly
+($v \ll c$). The monopole and dipole terms make no contribution to the radiation, as a
+consequence of stress-energy conservation, which implies the conservation of
+the total mass-energy and of the total momentum of the system, respectively. The leading contribution to the
+radiation is therefore the quadrupole term~\cite{Maggiore2008},
 \begin{equation}
-    h_{ij}^{\mathrm{TT}}(t, r) = \frac{2G}{c^4\, r}\, \Lambda_{ij,kl}\, \ddot{Q}_{kl}\!\left(t - \frac{r}{c}\right) ,
+    h_{ij}^{\mathrm{TT}} \sim \frac{2G}{c^4}\,\frac{\ddot{Q}_{ij}}{r}\, ,
     \qquad
-    Q_{ij} = \int \dd^3x\, \rho(t,\bm{x}) \left( x_i x_j - \frac{1}{3}r^2 \delta_{ij} \right) ,
+    Q_{ij} = \int \mathrm{d}^3x\, \rho \left( x_i x_j - \frac{1}{3}\, |\mathbf{x}|^2 \delta_{ij} \right) ,
     \label{eq:quadrupolo}
 \end{equation}
-dove $r$ è la distanza dalla sorgente, $\rho$ la densità di massa e $\Lambda_{ij,kl}$ il proiettore che seleziona la parte trasversa e a traccia nulla. A differenza dell'elettromagnetismo non esiste radiazione di monopolo né di dipolo: il monopolo di massa è la massa-energia totale, che si conserva, e il dipolo di massa è legato alla posizione del centro di massa, la cui derivata seconda è nulla per la conservazione della quantità di moto. La radiazione gravitazionale è quindi, al primo ordine, di natura quadrupolare. La potenza irraggiata è data dalla formula di quadrupolo di Einstein
-\begin{equation}
-    L_{\mathrm{GW}} = \frac{G}{5c^5} \left\langle \dddot{Q}_{ij}\, \dddot{Q}_{ij} \right\rangle ,
-    \label{eq:luminosita_quadrupolo}
-\end{equation}
-dove $\langle\cdot\rangle$ indica una media su più periodi dell'onda.
+where $Q_{ij}$ is the reduced (traceless) quadrupole moment of the mass density
+$\rho$ of the source.
 
-\subsection{Binarie in orbita circolare}
-
-Le sorgenti più importanti di onde gravitazionali sono i sistemi binari di oggetti compatti (nane bianche, stelle di neutroni, buchi neri). Per due masse $m_1$ e $m_2$ in orbita circolare con frequenza orbitale $f_{\mathrm{orb}}$, applicando la~\eqref{eq:quadrupolo} si trova che l'onda è emessa alla frequenza
+The most important sources of gravitational waves are binary systems of compact
+objects, whose orbital motion produces a time-varying quadrupole moment.
+For a binary on a circular orbit with orbital angular frequency
+$\omega_s$, the mass distribution returns to the same configuration after half
+an orbit, so that the quadrupole moment oscillates twice per orbital period.
+As a consequence, gravitational waves are emitted at twice the orbital
+frequency,
 \begin{equation}
-    f = 2 f_{\mathrm{orb}} \, ,
+    \omega_{\mathrm{gw}} = 2\,\omega_s\, , \qquad \Rightarrow \qquad
+    f_{\mathrm{gw}} = \frac{\omega_{\mathrm{gw}}}{2\pi} = 2 f_{\mathrm{orb}}\, .
+    \label{eq:fgw}
 \end{equation}
-conseguenza della natura quadrupolare della radiazione (il momento di quadrupolo torna uguale a sé stesso dopo mezza orbita). L'ampiezza dell'onda, mediata sull'orientazione, dipende dalle masse solo attraverso la combinazione detta \textit{chirp mass}~\cite{Maggiore2008}:
+
+Using Kepler's law to eliminate the orbital radius, the amplitude of the
+emitted wave, averaged over the orientations of the binary, can be written as~\cite{Taylor2021}
 \begin{equation}
-    \mathcal{M} = \frac{(m_1 m_2)^{3/5}}{(m_1+m_2)^{1/5}}\, , \qquad
-    h \simeq \frac{4}{r} \left(\frac{G\mathcal{M}}{c^2}\right)^{5/3} \left(\frac{\pi f}{c}\right)^{2/3} .
+    h = \sqrt{\frac{32}{5}}\;
+    \frac{(G\mathcal{M}_c)^{5/3}\,(\pi f_{\mathrm{gw}})^{2/3}}{c^4\, r}\, ,
     \label{eq:ampiezza_binaria}
 \end{equation}
+where $r$ is the distance to the source and
+$\mathcal{M}_c = (m_1 m_2)^{3/5}/(m_1 + m_2)^{1/5}$ is the chirp mass of the binary, with $m_1$ and $m_2$ the masses of the two
+components. At this order, the amplitude depends on the masses only through
+the combination $\mathcal{M}_c$.
 
-L'energia emessa in onde gravitazionali viene sottratta all'energia orbitale: le due masse si avvicinano, la frequenza aumenta e con essa l'ampiezza. Bilanciando la~\eqref{eq:luminosita_quadrupolo} con la variazione dell'energia orbitale si ottiene l'evoluzione in frequenza
+The total energy of the orbit can be written as a function
+of the gravitational-wave frequency,
 \begin{equation}
-    \frac{\dd f}{\dd t} = \frac{96}{5}\, \pi^{8/3} \left(\frac{G\mathcal{M}}{c^3}\right)^{5/3} f^{11/3} \, ,
+    E_{\mathrm{orb}} = -\frac{1}{2}\,\mathcal{M}_c
+    \left(\pi G \mathcal{M}_c f_{\mathrm{gw}}\right)^{2/3}\, ,
+    \label{eq:E_orb}
+\end{equation}
+while the power radiated in gravitational waves, obtained from the quadrupole
+formula, is
+\begin{equation}
+    P = \frac{32}{5}\,\frac{c^5}{G}
+    \left(\frac{\pi G \mathcal{M}_c f_{\mathrm{gw}}}{c^3}\right)^{10/3}\, .
+    \label{eq:potenza}
+\end{equation}
+Since the energy carried away by the waves is drawn from the orbit,
+$P = -\mathrm{d}E_{\mathrm{orb}}/\mathrm{d}t$, combining these two equations
+gives the evolution of the frequency,
+\begin{equation}
+    \dot f_{\mathrm{gw}} = \frac{96}{5}\,\pi^{8/3}
+    \left(\frac{G\mathcal{M}_c}{c^3}\right)^{5/3} f_{\mathrm{gw}}^{11/3}\, .
     \label{eq:chirp}
 \end{equation}
-il caratteristico \textit{chirp} che porta il sistema alla coalescenza. La~\eqref{eq:chirp} ha una conseguenza importante: poiché $\dd f/\dd t \propto f^{11/3}$, una binaria evolve molto lentamente a basse frequenze e trascorre la maggior parte della sua vita (nella banda di emissione) lontano dalla coalescenza.
+We note that binaries emitting at low frequencies evolve very slowly.
 
-\subsection{Binarie di buchi neri supermassicci}
+Since the characteristic frequency of the emission scales inversely with the
+total mass of the system, the binaries emitting at the lowest frequencies are
+supermassive black hole binaries (SMBHBs), with masses of
+$10^{8}$--$10^{10}\,M_\odot$. Supermassive black holes reside at the centres of most galaxies and cannot be
+the product of stellar evolution. It is widely accepted that SMBHBs form as a
+natural consequence of galaxy mergers: when two galaxies merge, their central
+black holes form a binary system which, once it reaches separations of the
+order of milliparsecs, emits gravitational waves in the nanohertz band~\cite{Taylor2021,Sesana2008}.
 
-La frequenza massima raggiungibile prima della coalescenza è, a meno di fattori di ordine unità, quella dell'ultima orbita circolare stabile (ISCO) di un buco nero di massa $M = m_1 + m_2$:
+
+\section{Stochastic gravitational wave background} \label{sec:GWB}
+
+A large population of compact binaries, such as SMBHBs, emitting at comparable
+frequencies and with comparable amplitudes cannot be resolved individually.
+The resulting signal is an incoherent superposition of the individual waves,
+which forms a stochastic gravitational wave background (GWB).
+A GWB is defined by the fact that the
+signal $h(t)$ is a random process, which cannot be described by a
+deterministic waveform but only statistically, through its ensemble averages.
+We will make the following assumptions on the GWB~\cite{Maggiore2008}:
+\begin{itemize}
+    \item \textbf{stationary}: its statistical properties do not change in time;
+    \item \textbf{Gaussian}: it is fully characterized by its two-point correlator;
+    \item \textbf{isotropic}: its statistical properties are the same in every direction;
+    \item \textbf{unpolarized}: the two polarizations are uncorrelated and have the same intensity.
+\end{itemize}
+
+Under these assumptions, the background is completely characterized by a
+single function of frequency, its one-sided power spectral density (PSD)
+$S_h(f)$, which describes how the power of the signal is distributed in
+frequency. From $S_h(f)$ it is convenient to define the characteristic strain~\cite{Taylor2021}
 \begin{equation}
-    f_{\mathrm{ISCO}} = \frac{c^3}{6^{3/2}\pi G M} \simeq 4.4\ \mathrm{kHz} \left(\frac{\Msun}{M}\right) .
-    \label{eq:fisco}
+    h_c(f) = \sqrt{f\,S_h(f)}\,,
+    \label{eq:hc}
 \end{equation}
-La frequenza tipica di emissione scala quindi come l'inverso della massa del sistema. Per binarie di massa stellare ($M \sim 10$--$100\,\Msun$) si trovano frequenze da decine a centinaia di Hz, la banda degli interferometri terrestri come LIGO e Virgo. Per le binarie di buchi neri supermassicci (\textit{supermassive black hole binaries}, SMBHB), con $M \sim 10^8$--$10^{10}\,\Msun$, la~\eqref{eq:fisco} dà frequenze al più dell'ordine del $\upmu$Hz, e durante la lunga fase di spiraleggiamento che precede la coalescenza (periodi orbitali di mesi o anni) l'emissione avviene nella banda dei nanohertz, $f \sim 10^{-9}$--$10^{-7}$~Hz~\cite{Taylor2021}. Questa è la banda di frequenze accessibile ai \textit{Pulsar Timing Array}, descritti nel Capitolo~\ref{chpt:PTA}.
+a dimensionless quantity that can be directly compared with the strain
+amplitudes of individual sources discussed in Section~\ref{sec:GW_binarie}.
 
-Le SMBHB si formano in seguito alla fusione di due galassie, ciascuna delle quali ospita al proprio centro un buco nero supermassiccio: dopo la fusione i due buchi neri affondano verso il centro della nuova galassia per attrito dinamico e formano un sistema legato che, nelle fasi finali, perde energia principalmente per emissione di onde gravitazionali~\cite{Sesana2008, Taylor2021}.
-
-\begin{figure}[h!]
-    \centering
-    % \includegraphics[width=0.85\textwidth]{Figure/cap1/spettro_GW.pdf}
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}\TODO{figura: spettro delle onde gravitazionali (PTA / LISA / LIGO-Virgo) con le relative sorgenti --- da una review, citando la fonte}\vspace{1.5cm}}}
-    \caption{\footnotesize Lo spettro delle onde gravitazionali: sorgenti e rivelatori nelle diverse bande di frequenza.}
-    \label{fig:spettro_GW}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Il fondo stocastico di onde gravitazionali} \label{sec:GWB}
-
-Nell'Universo sono presenti moltissime SMBHB che emettono contemporaneamente nella banda dei nanohertz. Poiché, per la~\eqref{eq:chirp}, ciascuna di esse resta a lungo a bassa frequenza, il numero di sorgenti per intervallo di frequenza è elevato e i loro segnali si sommano in modo incoerente: invece di singole sorgenti risolte ci si aspetta di osservare un \textit{fondo stocastico di onde gravitazionali} (\textit{gravitational wave background}, GWB)~\cite{Sesana2008, Taylor2021}.
-
-Un segnale stocastico non è prevedibile istante per istante e va descritto attraverso le sue proprietà statistiche. Assumendo che il fondo sia gaussiano, stazionario, isotropo e non polarizzato, tutta l'informazione è contenuta nella sua densità spettrale di potenza $S_h(f)$, o equivalentemente nella densità di energia per intervallo logaritmico di frequenza, normalizzata alla densità di energia critica dell'Universo $\varepsilon_c = 3H_0^2c^2/8\pi G$~\cite{Taylor2021}:
+Assuming that all binaries are on circular orbits and that their evolution is
+driven only by the emission of gravitational waves, the energy radiated per
+logarithmic frequency interval follows from Eqs.~\eqref{eq:potenza} and
+\eqref{eq:chirp}, \mbox{$f_{\mathrm{gw}}\,P/\dot f_{\mathrm{gw}} \propto f_{\mathrm{gw}}^{2/3}$}. Summing over the whole
+population, the characteristic strain spectrum of the background follows the
+power law~\cite{Phinney2001,Taylor2021}
 \begin{equation}
-    \Omega_{\mathrm{GW}}(f) \equiv \frac{1}{\varepsilon_c} \frac{\dd \varepsilon_{\mathrm{GW}}}{\dd \ln f} = \frac{2\pi^2}{3H_0^2}\, f^3 S_h(f) = \frac{2\pi^2}{3H_0^2}\, f^2 h_c^2(f)\, ,
-    \label{eq:omega_gw}
-\end{equation}
-dove si è introdotto lo \textit{strain caratteristico} $h_c(f) \equiv \sqrt{f\,S_h(f)}$.
-
-Per una popolazione di binarie circolari la cui evoluzione è guidata dall'emissione di onde gravitazionali, lo spettro può essere calcolato con un argomento dovuto a Phinney~\cite{Phinney2001}: l'energia emessa da una singola binaria per intervallo logaritmico di frequenza scala come $\dd E/\dd\ln f \propto \mathcal{M}^{5/3} f^{2/3}$, quindi, indipendentemente dai dettagli della popolazione, $\Omega_{\mathrm{GW}}(f) \propto f^{2/3}$. Dalla~\eqref{eq:omega_gw} segue che lo strain caratteristico è una legge di potenza
-\begin{equation}
-    h_c(f) = \Agwb \left(\frac{f}{\fyr}\right)^{-2/3} ,
+    h_c(f) = A_{\mathrm{GWB}} \left(\frac{f}{f_{\mathrm{yr}}}\right)^{-2/3} ,
     \label{eq:hc_powerlaw}
 \end{equation}
-dove $\fyr = 1\ \mathrm{yr}^{-1} \simeq 3.17\times10^{-8}$~Hz è una frequenza di riferimento e $\Agwb$ l'ampiezza del fondo a quella frequenza. Tutta l'informazione astrofisica sulla popolazione di SMBHB (tasso di fusione delle galassie, distribuzione delle masse, \dots) è contenuta nell'ampiezza, i cui valori previsti sono dell'ordine di $10^{-15}$~\cite{Sesana2008}. Deviazioni dalla pendenza $-2/3$ alle frequenze più basse possono comparire se le binarie interagiscono ancora con l'ambiente (stelle, gas) o hanno orbite eccentriche~\cite{Taylor2021}.
-
-Come vedremo nel Capitolo~\ref{chpt:PTA}, ciò che un PTA misura non è lo strain ma i ritardi nei tempi di arrivo degli impulsi delle pulsar. Il fondo descritto dalla~\eqref{eq:hc_powerlaw} produce in questi ritardi un segnale con densità spettrale di potenza~\cite{Taylor2021}
-\begin{equation}
-    S_{\mathrm{GWB}}(f) = \frac{h_c^2(f)}{12\pi^2 f^3} = \frac{\Agwb^2}{12\pi^2}\left(\frac{f}{\fyr}\right)^{-\gammagwb} \fyr^{-3}\, , \qquad \gammagwb = \frac{13}{3}\, ,
-    \label{eq:psd_gwb}
-\end{equation}
-cioè ancora una legge di potenza, molto ripida, con più potenza alle basse frequenze: un segnale ``rosso''. I due parametri $(\Agwb, \gammagwb)$ sono quelli usati in tutta la tesi per descrivere il GWB. Come discusso nel Capitolo~\ref{chpt:rumore}, la stessa forma funzionale descrive anche diverse sorgenti di rumore delle pulsar: questa somiglianza è all'origine delle degenerazioni studiate in questo lavoro.
+where $A_{\mathrm{GWB}}$ is the amplitude at the reference frequency
+$f_{\mathrm{yr}} = 1\,\mathrm{yr}^{-1}$. While the spectral index is fixed by
+the physics of the individual binaries, the amplitude depends on the properties
+of the SMBHB population, and is of the order of $10^{-15}$~\cite{EPTA2023_GWB,NANOGrav2023,PPTA2023,CPTA2023}.
+In Chapter~\ref{chpt:PTA} we will see how this strain spectrum translates into
+a red noise process in the timing residuals, common to all pulsars.

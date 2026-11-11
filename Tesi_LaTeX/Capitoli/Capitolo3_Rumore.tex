@@ -1,42 +1,251 @@
-%========================================================================================
-%  CAPITOLO 3 — IL MODELLO DI RUMORE DI UNA PULSAR
-%  Obiettivo: descrivere tutte le componenti del modello usato nelle analisi.
-%  Lunghezza indicativa: 5-6 pagine.
-%  Fonti: Taylor (2021) cap. 7, Shaifullah (2025) sez. 3, EPTA DR2 paper II (EPTA2023_noise),
-%         Lentati et al. (2016), tesi di Irene sez. 2.1.
-%========================================================================================
+% !TEX root = ../main.tex
+\chapter{The pulsar noise model} \label{chpt:rumore}
 
-\chapter{Il modello di rumore di una pulsar} \label{chpt:rumore}
-\sloppy
+The TOAs can be described as the sum of a deterministic contribution, given by
+the timing model introduced in Section~\ref{sec:timing}, and a stochastic
+contribution due to several noise processes~\cite{Lentati2016,Shaifullah2025}.
+In this chapter we describe these noise processes and the way they are modeled.
+Although they have different physical origins, they are all modeled as
+Gaussian processes.
 
-% Intro: i residui = segnale + rumore; il rumore si divide in bianco e rosso; il rosso si
-% divide in acromatico e cromatico. Tabella riassuntiva dei 6 parametri usati in tesi.
+A first broad distinction is between white noise and red noise. White noise
+has a flat power spectral density, that is, the same power at all Fourier
+frequencies $f$ of the timing residuals, so it produces no slow trends in the
+residuals. Red noise instead has more power at low
+frequencies, and it produces slow, time-correlated variations of the
+residuals~\cite{Taylor2021}. When two noise processes have a
+similar effect on the timing residuals, the data cannot fully separate them,
+and part of the power of one process can be attributed to the other. Their
+parameters are then degenerate~\cite{Shaifullah2025,Ferranti2025}.
 
-\section{Rumore bianco} \label{sec:rumore_bianco}
-% - Incertezza radiometrica sui TOA, jitter.
-% - Parametri per backend: EFAC (riscala le barre d'errore), EQUAD/TNEQUAD (aggiunge in
-%   quadratura), ECORR (correlato tra TOA della stessa osservazione).
-% - Formula: sigma^2 = EFAC^2 * (sigma_TOA^2 + EQUAD^2).
-% - Nella tesi: fissati ai valori del noisedict (marginalizzati separatamente).
+\section{Gaussian processes with power-law spectra} \label{sec:modello_comune}
 
-\section{Rumore rosso acromatico} \label{sec:rumore_rosso}
-% - Spin noise: irregolarità della rotazione. Non dipende dalla frequenza radio.
-% - Legge di potenza P(f) = A^2/(12 pi^2) (f/fyr)^(-gamma) fyr^(-3)
-%   -> stessa forma del GWB (Eq. psd_gwb)! Parametri: red_noise_log10_A, red_noise_gamma.
+All the red noise processes considered in this work are described in the same
+way. A red noise process in the timing residuals is written as a Fourier series
+truncated to $N$ frequencies~\cite{Taylor2021},
+\begin{equation}
+    \delta t_{\rm red}(t_i) = \sum_{k=1}^{N} \Big[ a_k \sin(2\pi f_k t_i)
+    + b_k \cos(2\pi f_k t_i) \Big],
+    \qquad f_k = \frac{k}{T},
+    \label{eq:fourier}
+\end{equation}
+where $T$ is the time span of the data. The lowest frequency is therefore
+$1/T$, while the number of components $N$ sets the highest one, $N/T$. Only
+low frequencies are needed, since red noise has most of its power there.
 
-\section{Rumore cromatico: dispersione e scattering} \label{sec:rumore_cromatico}
-% - Variazioni di DM nel tempo (moto relativo pulsar-Terra-ISM): ritardo prop. a nu^-2.
-%   Parametri: dm_gp_log10_A, dm_gp_gamma.
-% - Scattering nel mezzo interstellare: ritardo prop. a nu^-alpha, alpha = 4 (spettro di
-%   Kolmogorov darebbe 4.4). Parametri: sv_gp_log10_A, sv_gp_gamma (+ sv_gp_alpha se libero).
-% - Perché serve una buona copertura in frequenza radio (Ferranti2025).
+The coefficients $a_k$ and $b_k$ are independent Gaussian random variables
+with zero mean, whose variance is fixed by the PSD of the process,
+\begin{equation}
+    \langle a_k^2 \rangle = \langle b_k^2 \rangle = \frac{S(f_k)}{T}.
+    \label{eq:varianza_coeff}
+\end{equation}
+For the PSD we use a power law with amplitude $A$ and spectral index $\gamma$,
+\begin{equation}
+    S(f) = \frac{A^2}{12\pi^2}\left(\frac{f}{\fyr}\right)^{-\gamma}\fyr^{-3},
+    \label{eq:PSD_powerlaw}
+\end{equation}
+which for $\gamma = \gammagwb = 13/3$ gives back the PSD of the GWB in
+Eq.~\eqref{eq:PSD_GWB}. Each red noise process is therefore described by only
+two parameters, $A$ and $\gamma$.
 
-\section{Processi gaussiani e base di Fourier} \label{sec:GP}
-% - Ogni processo rosso scritto come somma di seni e coseni alle frequenze k/T,
-%   k = 1..N, con coefficienti gaussiani di varianza data dalla PSD.
-% - Per i processi cromatici la base è moltiplicata per (nu/nu_ref)^(-alpha).
-% - Numero di componenti di Fourier per J1640+2224 (dal noisedict di DR2low).
-% - Figura: PSD delle tre componenti + white noise per J1640 (stile Irene fig. 2.7).
+\section{White noise} \label{sec:wn}
 
-\section{Riepilogo del modello} \label{sec:riepilogo_modello}
-% Tabella: componente | dipendenza da nu | parametri | prior.
+As mentioned above, white noise has a flat power spectral density. In pulsar
+timing analysis there are three main sources of white noise~\cite{Taylor2021}, each described by
+a parameter defined separately for every observing system, that is, every
+combination of receiver and backend.
+\begin{itemize}
+    \item \textbf{Radiometer noise (EFAC).} The TOA uncertainty
+    $\sigma_{{\rm TOA},i}$ obtained from the template fit may not include all
+    sources of error, so it is multiplied by a correction factor, the EFAC.
+    \item \textbf{Additional white noise (EQUAD).} White noise not related to
+    the radiometer, for example due to instrumental effects, is added in
+    quadrature to the TOA uncertainty through the EQUAD.
+    \item \textbf{Pulse jitter (ECORR).} Since each TOA is obtained by folding a
+    finite number of pulses, the folded profile fluctuates from one observation
+    to the next. This noise is fully correlated between TOAs of the same
+    observing epoch and uncorrelated between different epochs, and it is
+    described by the ECORR.
+\end{itemize}
+Without ECORR, the variance of the $i$-th TOA is then
+\begin{equation}
+    \sigma_i^2 = \mathrm{EFAC}^2\,\sigma_{{\rm TOA},i}^2 + \mathrm{EQUAD}^2 .
+    \label{eq:sigma_wn}
+\end{equation}
+In this work the white noise parameters are fixed to the values provided with
+the DR2low dataset, and ECORR is included only for the LOFAR
+systems~\cite{Iraci2025}.
+
+\section{Intrinsic red noise} \label{sec:rn}
+
+The intrinsic red noise, also called spin noise, results from irregularities in
+the rotation of the pulsar~\cite{Shaifullah2025}. Although MSPs have a very stable rotation, they
+still show small fluctuations in their rotational phase and period~\cite{Taylor2021}. These
+fluctuations produce a red noise process that is achromatic, that is, it does
+not depend on the observing radio frequency $\nu$. Its power spectral density is
+modeled as a power law,
+\begin{equation}
+    S_{\rm RN}(f) = \frac{A_{\rm RN}^2}{12\pi^2}
+    \left(\frac{f}{\fyr}\right)^{-\gamma_{\rm RN}}\fyr^{-3},
+    \label{eq:PSD_RN}
+\end{equation}
+where $A_{\rm RN}$ is the amplitude at the reference frequency $\fyr$ and
+$\gamma_{\rm RN}$ is the spectral index. This PSD has the same functional form
+as the one of the GWB in Eq.~\eqref{eq:PSD_GWB}. As discussed in
+Section~\ref{sec:timingGW}, in a single pulsar the intrinsic red noise therefore
+cannot be distinguished from the GWB.
+
+The inferred parameters of the intrinsic red noise also depend on how the other
+noise processes are modeled. For example, NANOGrav and PPTA, which describe the
+DM variations with different methods, find slightly different spin noise
+parameters for the pulsars observed by both arrays~\cite{Shaifullah2025}.
+
+\section{Chromatic red noise} \label{sec:chrom}
+
+The radio pulses reach the Earth after travelling through the ionized
+interstellar medium, which delays them by an amount that depends on the
+observing radio frequency $\nu$, with lower frequencies delayed more. Since the
+pulsar, the Earth and the ISM move with respect to each other, the electron
+content along the line of sight changes with time, and so do these delays~\cite{Shaifullah2025}. The
+result is a red noise process in the timing residuals whose amplitude depends
+on $\nu$, called chromatic red noise.
+
+Chromatic red noise is modeled with the same Fourier basis used for the
+achromatic red noise, scaled by a power of the radio
+frequency~\cite{Ferranti2025,Iraci2025},
+\begin{equation}
+    \delta t_{\rm chrom}(t_i, \nu_i) = \left(\frac{\nu_{\rm ref}}{\nu_i}\right)^{\alpha}
+    \sum_{k=1}^{N} \Big[ a_k \sin(2\pi f_k t_i) + b_k \cos(2\pi f_k t_i) \Big],
+    \label{eq:chrom}
+\end{equation}
+where $\nu_i$ is the radio frequency of the $i$-th TOA, $\nu_{\rm ref} =
+1400$\,MHz is a reference frequency and $\alpha$ is the chromatic index. The
+case $\alpha = 0$ gives back the achromatic red noise, while $\alpha = 2$ and
+$\alpha = 4$ describe the dispersion measure variations and the scattering
+variations discussed below. Because of the factor $\nu_i^{-\alpha}$, these
+processes are much stronger at low radio frequencies.
+
+\subsection{Dispersion measure variations} \label{sec:dm}
+
+As mentioned in Section~\ref{sec:timing}, a radio wave travelling through the
+ionized ISM is delayed by an amount that depends on its frequency. For a cold
+plasma the dispersive delay is
+\begin{equation}
+    \Delta t_{\rm DM} = \mathcal{D}\,\frac{\rm DM}{\nu^2},
+    \qquad
+    {\rm DM} = \int_0^L n_e\,\dd l,
+    \label{eq:DM}
+\end{equation}
+where the dispersion measure DM is the integral of the electron density $n_e$
+along the line of sight, usually expressed in ${\rm pc\,cm^{-3}}$, and
+$\mathcal{D} = 4.148808\times10^{3}\,{\rm s\,MHz^2\,cm^3\,pc^{-1}}$ is the
+dispersion constant~\cite{Shaifullah2025}.
+
+The mean value of the DM and its linear and quadratic trends in time are
+included in the timing model~\cite{Taylor2021}. Because of the relative motion of the pulsar,
+the Earth and the ISM, however, the line of sight crosses different electron
+densities over time, and the remaining DM variations are stochastic. They are
+modeled as a chromatic red noise process, Eq.~\eqref{eq:chrom} with
+$\alpha = 2$, with a power-law PSD of the same form as the intrinsic red noise,
+\begin{equation}
+    S_{\rm DM}(f) = \frac{A_{\rm DM}^2}{12\pi^2}
+    \left(\frac{f}{\fyr}\right)^{-\gamma_{\rm DM}}\fyr^{-3},
+    \label{eq:PSD_DM}
+\end{equation}
+where $A_{\rm DM}$ is the amplitude of the delay at the reference frequency
+$\nu_{\rm ref}$.
+
+\subsection{Scattering variations} \label{sec:sv}
+
+Inhomogeneities in the ISM also scatter the radio waves, so that part of the
+signal reaches the observer along longer paths. This multipath propagation
+broadens the pulse with an exponential tail, whose characteristic timescale
+$\tau_{\rm sc}$ depends strongly on the radio
+frequency~\cite{Shaifullah2025},
+\begin{equation}
+    \tau_{\rm sc} \propto \nu^{-\alpha}.
+    \label{eq:scattering}
+\end{equation}
+Since the line of sight changes with time, the scattering also varies and
+introduces an additional chromatic red noise in the TOAs. It is modeled with
+Eq.~\eqref{eq:chrom} and a power-law PSD of the same form as
+Eq.~\eqref{eq:PSD_DM}, with amplitude $A_{\rm SV}$ and spectral index
+$\gamma_{\rm SV}$.
+
+The value of $\alpha$ depends on the properties of the scattering medium. A
+thin screen with inhomogeneities of the same size gives $\alpha = 4$, which is
+the value adopted for the DR2low dataset, while an extended medium with
+Kolmogorov turbulence gives $\alpha = 4.4$~\cite{Iraci2025}. In this work we use $\alpha = 4$ as
+the reference model, and we study the effect of $\alpha = 4.4$ and of a free
+chromatic index in Chapter~\ref{chpt:degenerazioni}.
+
+\subsection{Other chromatic noise processes} \label{sec:altri_chrom}
+
+DM variations and scattering are not the only chromatic effects in pulsar
+timing. The solar wind adds a further contribution to the DM, which is largest
+when the line of sight passes close to the Sun and therefore varies along the
+year. Other effects include sudden chromatic events, such as exponential dips
+in the residuals, and additional delays caused by refraction in the
+ISM~\cite{Shaifullah2025,Iraci2025}. For
+PSR~J1640+2224, which lies far from the ecliptic plane, the solar wind is
+described only by a deterministic term in the timing model~\cite{Iraci2025}, and none of these
+processes is included in the noise model. The only additional noise process
+considered in this work is the band noise, discussed in Section~\ref{sec:bn}.
+
+
+\section{Band noise} \label{sec:bn}
+
+Band noise is a red noise process that is present only in the TOAs observed
+within a given radio frequency band~\cite{Lentati2016}. In this work the band considered is the
+LOFAR band, 120--190\,MHz, which contains the TOAs recorded by the seven LOFAR
+observing systems of the DR2low dataset.
+
+The physical origin of band noise is not known with certainty. It may come from
+effects of the ISM that are not coherent between different bands, for example
+because photons at different frequencies cross different scattering volumes, or
+that scale with frequency more steeply than $\nu^{-2}$, and therefore appear as
+an excess of noise at low frequencies. Alternatively, it may be caused by
+frequency-dependent calibration errors, which can remain correlated over
+hundreds of days, or by radio frequency interference (RFI) present in the same
+band at different sites. RFI, however, is expected to be mostly uncorrelated
+between observations, and in that case it is absorbed by the white noise
+parameters. In the first IPTA data release, band noise was detected in four
+pulsars, with amplitudes $\log_{10}A_{\rm BN}$ between about $-14$ and $-12$
+and spectral indices $\gamma_{\rm BN}$ between about $0.6$ and
+$3.3$~\cite{Lentati2016}.
+
+Band noise must be distinguished from system noise, a red noise process that
+affects only the TOAs of a single observing system, that is, a single
+combination of telescope, receiver and backend, and that can arise from
+instrumental effects or calibration errors. If a band contains only one
+system, the two models act on exactly the same TOAs and are completely
+covariant, so that the data cannot distinguish between them. When several
+systems observe in the same band, as for the seven LOFAR systems used here, a
+noise process common to all of them can instead be attributed to the band. For
+this reason, low-frequency observations such as those of LOFAR, together with
+wide-band receivers, are particularly useful to identify band-dependent
+effects~\cite{Lentati2016}.
+
+The band noise is modeled as a power law of the same form as
+Eq.~\eqref{eq:PSD_RN}, with amplitude $A_{\rm BN}$ and spectral index
+$\gamma_{\rm BN}$. The Fourier basis of Section~\ref{sec:modello_comune} is
+applied only to the TOAs of the LOFAR band and is set to zero for all the other
+TOAs. Unlike the chromatic noise of Eq.~\eqref{eq:chrom}, no factor
+$(\nu_{\rm ref}/\nu_i)^{\alpha}$ is included, since the dependence on the radio
+frequency enters only through the selection of the TOAs. We use $N = 50$
+Fourier components. This number was fixed a priori and was not obtained from a
+model selection.
+
+\section{Noise model for PSR~J1640+2224}\label{NM}
+
+In summary, the reference noise model used in this work for PSR~J1640+2224
+contains the white noise, the intrinsic red noise, the DM variations and the
+scattering variations with $\alpha = 4$. The white noise parameters are fixed,
+with an EFAC and an EQUAD for each of the 13 observing systems and an ECORR for
+each of the seven LOFAR systems, so that the free parameters are the six
+amplitudes and spectral indices of the three red noise processes. In
+Chapter~\ref{chpt:degenerazioni} we also consider three variants of this
+model, one with $\alpha = 4.4$, one in which $\alpha$ is a free parameter, and
+one that includes the band noise of Section~\ref{sec:bn}. The number of
+Fourier components and the priors of each process are given in
+Section~\ref{sec:bayes}.

@@ -1,9 +1,7 @@
 % =====================================================================
-%  BIBLIOGRAFIA
+%  BIBLIOGRAFIA (voci verificate online, 9 novembre 2026)
 %  Si cita nel testo con \cite{chiave}. Compaiono in bibliografia
 %  solo le voci effettivamente citate.
-%  Per aggiungere un articolo: cerca su NASA ADS o INSPIRE, copia il
-%  BibTeX e incollalo qui sotto.
 % =====================================================================
 
 % ---------------------------------------------------------------------
@@ -13,7 +11,8 @@
   author    = {Maggiore, Michele},
   title     = {Gravitational Waves. Volume 1: Theory and Experiments},
   publisher = {Oxford University Press},
-  year      = {2008},
+  address   = {Oxford},
+  year      = {2007},
   doi       = {10.1093/acprof:oso/9780198570745.001.0001}
 }
 
@@ -21,46 +20,53 @@
   author    = {Maggiore, Michele},
   title     = {Gravitational Waves. Volume 2: Astrophysics and Cosmology},
   publisher = {Oxford University Press},
+  address   = {Oxford},
   year      = {2018},
   doi       = {10.1093/oso/9780198570899.001.0001}
 }
 
-@book{Taylor2021,
-  author    = {Taylor, Stephen R.},
-  title     = {Nanohertz Gravitational Wave Astronomy},
-  publisher = {CRC Press},
-  year      = {2021},
-  eprint    = {2105.13270},
+% Si cita la versione arXiv (quella effettivamente usata, con la numerazione
+% delle equazioni citata nel testo). Versione a stampa: S. R. Taylor,
+% Nanohertz Gravitational Wave Astronomy, CRC Press 2021, doi 10.1201/9781003240648
+@misc{Taylor2021,
+  author        = {Taylor, Stephen R.},
+  title         = {The Nanohertz Gravitational Wave Astronomer},
+  year          = {2021},
+  eprint        = {2105.13270},
   archivePrefix = {arXiv},
-  primaryClass  = {astro-ph.HE},
-  url       = {https://arxiv.org/abs/2105.13270}
+  primaryClass  = {astro-ph.HE}
 }
 
 @article{Shaifullah2025,
-  author  = {Shaifullah, Golam M.},
+  author  = {Shaifullah, G. M.},
   title   = {Pulsar timing arrays---challenges, and current status},
   journal = {Classical and Quantum Gravity},
   volume  = {42},
+  number  = {24},
   pages   = {243001},
-  year    = {2025}
+  year    = {2025},
+  doi     = {10.1088/1361-6382/ae19c2}
 }
 
 @book{LorimerKramer2005,
-  author    = {Lorimer, Duncan R. and Kramer, Michael},
+  author    = {Lorimer, D. R. and Kramer, M.},
   title     = {Handbook of Pulsar Astronomy},
+  series    = {Cambridge Observing Handbooks for Research Astronomers},
+  volume    = {4},
   publisher = {Cambridge University Press},
+  address   = {Cambridge},
   year      = {2005}
 }
 
 @article{ThraneTalbot2019,
-  author  = {Thrane, Eric and Talbot, Colm},
-  title   = {An introduction to {B}ayesian inference in gravitational-wave astronomy: parameter estimation, model selection, and hierarchical models},
-  journal = {Publications of the Astronomical Society of Australia},
-  volume  = {36},
-  pages   = {e010},
-  year    = {2019},
-  doi     = {10.1017/pasa.2019.2},
-  eprint  = {1809.02293},
+  author        = {Thrane, Eric and Talbot, Colm},
+  title         = {An introduction to {B}ayesian inference in gravitational-wave astronomy: parameter estimation, model selection, and hierarchical models},
+  journal       = {Publications of the Astronomical Society of Australia},
+  volume        = {36},
+  pages         = {e010},
+  year          = {2019},
+  doi           = {10.1017/pasa.2019.2},
+  eprint        = {1809.02293},
   archivePrefix = {arXiv}
 }
 
@@ -68,23 +74,23 @@
 %  Onde gravitazionali: storia e prime osservazioni
 % ---------------------------------------------------------------------
 @article{Einstein1916,
-  author  = {Einstein, Albert},
+  author  = {Einstein, A.},
   title   = {N{\"a}herungsweise {I}ntegration der {F}eldgleichungen der {G}ravitation},
-  journal = {Sitzungsberichte der K{\"o}niglich Preu{\ss}ischen Akademie der Wissenschaften},
+  journal = {Sitzungsberichte der K{\"o}niglich Preu{\ss}ischen Akademie der Wissenschaften (Berlin)},
   pages   = {688--696},
   year    = {1916}
 }
 
 @article{Einstein1918,
-  author  = {Einstein, Albert},
+  author  = {Einstein, A.},
   title   = {{\"U}ber {G}ravitationswellen},
-  journal = {Sitzungsberichte der K{\"o}niglich Preu{\ss}ischen Akademie der Wissenschaften},
+  journal = {Sitzungsberichte der K{\"o}niglich Preu{\ss}ischen Akademie der Wissenschaften (Berlin)},
   pages   = {154--167},
   year    = {1918}
 }
 
 @article{HulseTaylor1975,
-  author  = {Hulse, Russell A. and Taylor, Joseph H.},
+  author  = {Hulse, R. A. and Taylor, J. H.},
   title   = {Discovery of a pulsar in a binary system},
   journal = {The Astrophysical Journal Letters},
   volume  = {195},
@@ -94,7 +100,7 @@
 }
 
 @article{TaylorWeisberg1982,
-  author  = {Taylor, Joseph H. and Weisberg, Joel M.},
+  author  = {Taylor, J. H. and Weisberg, J. M.},
   title   = {A new test of general relativity: gravitational radiation and the binary pulsar {PSR} 1913+16},
   journal = {The Astrophysical Journal},
   volume  = {253},
@@ -104,32 +110,37 @@
 }
 
 @article{LIGO2016,
-  author  = {{LIGO Scientific Collaboration and Virgo Collaboration} and Abbott, B. P. and others},
-  title   = {Observation of Gravitational Waves from a Binary Black Hole Merger},
-  journal = {Physical Review Letters},
-  volume  = {116},
-  pages   = {061102},
-  year    = {2016},
-  doi     = {10.1103/PhysRevLett.116.061102}
+  author        = {{LIGO Scientific Collaboration and Virgo Collaboration} and Abbott, B. P. and others},
+  title         = {Observation of Gravitational Waves from a Binary Black Hole Merger},
+  journal       = {Physical Review Letters},
+  volume        = {116},
+  number        = {6},
+  pages         = {061102},
+  year          = {2016},
+  doi           = {10.1103/PhysRevLett.116.061102},
+  eprint        = {1602.03837},
+  archivePrefix = {arXiv}
 }
 
-@article{Phinney2001,
-  author  = {Phinney, E. Sterl},
-  title   = {A Practical Theorem on Gravitational Wave Backgrounds},
-  journal = {arXiv e-prints},
-  year    = {2001},
-  eprint  = {astro-ph/0108028},
+@misc{Phinney2001,
+  author        = {Phinney, E. S.},
+  title         = {A Practical Theorem on Gravitational Wave Backgrounds},
+  year          = {2001},
+  eprint        = {astro-ph/0108028},
   archivePrefix = {arXiv}
 }
 
 @article{Sesana2008,
-  author  = {Sesana, Alberto and Vecchio, Alberto and Colacino, Carlo Nicola},
-  title   = {The stochastic gravitational-wave background from massive black hole binary systems: implications for observations with Pulsar Timing Arrays},
-  journal = {Monthly Notices of the Royal Astronomical Society},
-  volume  = {390},
-  pages   = {192--209},
-  year    = {2008},
-  doi     = {10.1111/j.1365-2966.2008.13682.x}
+  author        = {Sesana, A. and Vecchio, A. and Colacino, C. N.},
+  title         = {The stochastic gravitational-wave background from massive black hole binary systems: implications for observations with {P}ulsar {T}iming {A}rrays},
+  journal       = {Monthly Notices of the Royal Astronomical Society},
+  volume        = {390},
+  number        = {1},
+  pages         = {192--209},
+  year          = {2008},
+  doi           = {10.1111/j.1365-2966.2008.13682.x},
+  eprint        = {0804.4476},
+  archivePrefix = {arXiv}
 }
 
 % ---------------------------------------------------------------------
@@ -146,7 +157,7 @@
 }
 
 @article{Backer1982,
-  author  = {Backer, D. C. and Kulkarni, Shrinivas R. and Heiles, Carl and Davis, M. M. and Goss, W. M.},
+  author  = {Backer, D. C. and Kulkarni, S. R. and Heiles, C. and Davis, M. M. and Goss, W. M.},
   title   = {A millisecond pulsar},
   journal = {Nature},
   volume  = {300},
@@ -165,7 +176,7 @@
 }
 
 @article{Detweiler1979,
-  author  = {Detweiler, Steven},
+  author  = {Detweiler, S.},
   title   = {Pulsar timing measurements and the search for gravitational waves},
   journal = {The Astrophysical Journal},
   volume  = {234},
@@ -195,84 +206,142 @@
 }
 
 @article{Lentati2016,
-  author  = {Lentati, L. and Shannon, R. M. and Coles, W. A. and others},
-  title   = {From spin noise to systematics: stochastic processes in the first {I}nternational {P}ulsar {T}iming {A}rray data release},
-  journal = {Monthly Notices of the Royal Astronomical Society},
-  volume  = {458},
-  pages   = {2161--2187},
-  year    = {2016},
-  doi     = {10.1093/mnras/stw395}
+  author        = {Lentati, L. and Shannon, R. M. and Coles, W. A. and others},
+  title         = {From spin noise to systematics: stochastic processes in the first {I}nternational {P}ulsar {T}iming {A}rray data release},
+  journal       = {Monthly Notices of the Royal Astronomical Society},
+  volume        = {458},
+  number        = {2},
+  pages         = {2161--2187},
+  year          = {2016},
+  doi           = {10.1093/mnras/stw395},
+  eprint        = {1602.05570},
+  archivePrefix = {arXiv}
+}
+
+@article{Hobbs2006,
+  author        = {Hobbs, G. B. and Edwards, R. T. and Manchester, R. N.},
+  title         = {{TEMPO2}, a new pulsar-timing package -- {I}. {A}n overview},
+  journal       = {Monthly Notices of the Royal Astronomical Society},
+  volume        = {369},
+  number        = {2},
+  pages         = {655--672},
+  year          = {2006},
+  doi           = {10.1111/j.1365-2966.2006.10302.x},
+  eprint        = {astro-ph/0603381},
+  archivePrefix = {arXiv}
+}
+
+@article{Edwards2006,
+  author        = {Edwards, R. T. and Hobbs, G. B. and Manchester, R. N.},
+  title         = {{TEMPO2}, a new pulsar timing package -- {II}. {T}he timing model and precision estimates},
+  journal       = {Monthly Notices of the Royal Astronomical Society},
+  volume        = {372},
+  number        = {4},
+  pages         = {1549--1574},
+  year          = {2006},
+  doi           = {10.1111/j.1365-2966.2006.10870.x},
+  eprint        = {astro-ph/0607664},
+  archivePrefix = {arXiv}
 }
 
 % ---------------------------------------------------------------------
-%  Risultati PTA 2023 (evidenza del GWB)
+%  Risultati PTA 2023 (evidenza del GWB) e dati EPTA
 % ---------------------------------------------------------------------
 @article{EPTA2023_DR2data,
-  author  = {{EPTA Collaboration} and Antoniadis, J. and others},
-  title   = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {I}. {T}he dataset and timing analysis},
-  journal = {Astronomy \& Astrophysics},
-  volume  = {678},
-  pages   = {A48},
-  year    = {2023},
-  doi     = {10.1051/0004-6361/202346841}
+  author        = {{EPTA Collaboration} and Antoniadis, J. and others},
+  title         = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {I}. {T}he dataset and timing analysis},
+  journal       = {Astronomy \& Astrophysics},
+  volume        = {678},
+  pages         = {A48},
+  year          = {2023},
+  doi           = {10.1051/0004-6361/202346841},
+  eprint        = {2306.16224},
+  archivePrefix = {arXiv}
 }
 
 @article{EPTA2023_noise,
-  author  = {{EPTA Collaboration} and Antoniadis, J. and others},
-  title   = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {II}. {C}ustomised pulsar noise models for spatially correlated gravitational waves},
-  journal = {Astronomy \& Astrophysics},
-  volume  = {678},
-  pages   = {A49},
-  year    = {2023},
-  doi     = {10.1051/0004-6361/202346842}
+  author        = {{EPTA Collaboration and InPTA Collaboration} and Antoniadis, J. and others},
+  title         = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {II}. {C}ustomised pulsar noise models for spatially correlated gravitational waves},
+  journal       = {Astronomy \& Astrophysics},
+  volume        = {678},
+  pages         = {A49},
+  year          = {2023},
+  doi           = {10.1051/0004-6361/202346842},
+  eprint        = {2306.16225},
+  archivePrefix = {arXiv}
 }
 
 @article{EPTA2023_GWB,
-  author  = {{EPTA Collaboration and InPTA Collaboration} and Antoniadis, J. and others},
-  title   = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {III}. {S}earch for gravitational wave signals},
-  journal = {Astronomy \& Astrophysics},
-  volume  = {678},
-  pages   = {A50},
-  year    = {2023},
-  doi     = {10.1051/0004-6361/202346844}
+  author        = {{EPTA Collaboration and InPTA Collaboration} and Antoniadis, J. and others},
+  title         = {The second data release from the {E}uropean {P}ulsar {T}iming {A}rray. {III}. {S}earch for gravitational wave signals},
+  journal       = {Astronomy \& Astrophysics},
+  volume        = {678},
+  pages         = {A50},
+  year          = {2023},
+  doi           = {10.1051/0004-6361/202346844},
+  eprint        = {2306.16214},
+  archivePrefix = {arXiv}
 }
 
 @article{NANOGrav2023,
-  author  = {Agazie, Gabriella and others},
-  title   = {The {NANOG}rav 15 yr Data Set: Evidence for a Gravitational-wave Background},
-  journal = {The Astrophysical Journal Letters},
-  volume  = {951},
-  pages   = {L8},
-  year    = {2023},
-  doi     = {10.3847/2041-8213/acdac6}
+  author        = {Agazie, G. and others},
+  title         = {The {NANOG}rav 15 yr Data Set: Evidence for a Gravitational-wave Background},
+  journal       = {The Astrophysical Journal Letters},
+  volume        = {951},
+  number        = {1},
+  pages         = {L8},
+  year          = {2023},
+  doi           = {10.3847/2041-8213/acdac6},
+  eprint        = {2306.16213},
+  archivePrefix = {arXiv}
 }
 
 @article{PPTA2023,
-  author  = {Reardon, Daniel J. and others},
-  title   = {Search for an Isotropic Gravitational-wave Background with the {P}arkes {P}ulsar {T}iming {A}rray},
-  journal = {The Astrophysical Journal Letters},
-  volume  = {951},
-  pages   = {L6},
-  year    = {2023},
-  doi     = {10.3847/2041-8213/acdd02}
+  author        = {Reardon, D. J. and others},
+  title         = {Search for an Isotropic Gravitational-wave Background with the {P}arkes {P}ulsar {T}iming {A}rray},
+  journal       = {The Astrophysical Journal Letters},
+  volume        = {951},
+  number        = {1},
+  pages         = {L6},
+  year          = {2023},
+  doi           = {10.3847/2041-8213/acdd02},
+  eprint        = {2306.16215},
+  archivePrefix = {arXiv}
 }
 
 @article{CPTA2023,
-  author  = {Xu, Heng and others},
-  title   = {Searching for the Nano-Hertz Stochastic Gravitational Wave Background with the {C}hinese {P}ulsar {T}iming {A}rray Data Release {I}},
-  journal = {Research in Astronomy and Astrophysics},
-  volume  = {23},
-  pages   = {075024},
-  year    = {2023},
-  doi     = {10.1088/1674-4527/acdfa5}
+  author        = {Xu, H. and others},
+  title         = {Searching for the Nano-Hertz Stochastic Gravitational Wave Background with the {C}hinese {P}ulsar {T}iming {A}rray Data Release {I}},
+  journal       = {Research in Astronomy and Astrophysics},
+  volume        = {23},
+  number        = {7},
+  pages         = {075024},
+  year          = {2023},
+  doi           = {10.1088/1674-4527/acdfa5},
+  eprint        = {2306.16216},
+  archivePrefix = {arXiv}
 }
 
 @article{Ferranti2025,
-  author  = {Ferranti, I. and Falxa, M. and Sesana, A. and others},
-  title   = {Impact of the observation frequency coverage on the significance of a gravitational wave background detection in pulsar timing array data},
-  journal = {Astronomy \& Astrophysics},
-  volume  = {694},
-  pages   = {A38},
-  year    = {2025},
-  doi     = {10.1051/0004-6361/202452805}
+  author        = {Ferranti, I. and Falxa, M. and Sesana, A. and Chalumeau, A. and Porayko, N. and Shaifullah, G. and Cognard, I. and Guillemot, L. and Kramer, M. and Liu, K. and Theureau, G.},
+  title         = {Impact of the observation frequency coverage on the significance of a gravitational wave background detection in pulsar timing array data},
+  journal       = {Astronomy \& Astrophysics},
+  volume        = {694},
+  pages         = {A38},
+  year          = {2025},
+  doi           = {10.1051/0004-6361/202452805},
+  eprint        = {2410.18179},
+  archivePrefix = {arXiv}
+}
+
+@article{Iraci2025,
+  author        = {Iraci, F. and Chalumeau, A. and Tiburzi, C. and Verbiest, J. P. W. and Possenti, A. and others},
+  title         = {Combining the second data release of the {E}uropean {P}ulsar {T}iming {A}rray with low-frequency pulsar data},
+  journal       = {Astronomy \& Astrophysics},
+  volume        = {704},
+  pages         = {A109},
+  year          = {2025},
+  doi           = {10.1051/0004-6361/202555516},
+  eprint        = {2510.04639},
+  archivePrefix = {arXiv}
 }

@@ -1,0 +1,267 @@
+%========================================================================================
+%  SINTESI DELLA TESI (versione corretta) — Lorenzo Caivano
+%  Compila questo file da solo (è indipendente dalla tesi).
+%========================================================================================
+\documentclass[12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Titolo di capitolo semplice e centrato (niente "Capitolo 1")
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering}{}{0pt}{\Large}
+
+%----------------------------------------------------------------------------------------
+%  DATI DELLA TESI
+%----------------------------------------------------------------------------------------
+% Italiano
+\newcommand{\cognomeIT}{Caivano}
+\newcommand{\nomeIT}{Lorenzo}
+\newcommand{\matricolaIT}{889490}
+\newcommand{\titoloTesiIT}{Studio delle degenerazioni nell'analisi del rumore delle pulsar}
+\newcommand{\relatoreIT}{Prof. Alberto Sesana}
+\newcommand{\correlatoreIT}{Dott.ssa Irene Ferranti}
+\newcommand{\dataSedutaIT}{23--25 Novembre 2026}
+\newcommand{\corsoDiLaureaIT}{Fisica}
+\newcommand{\recapitoTelefonicoIT}{+39 3391306307}
+
+% Inglese
+\newcommand{\surnameEN}{Caivano}
+\newcommand{\nameEN}{Lorenzo}
+\newcommand{\matricolaEN}{889490}
+\newcommand{\thesisTitleEN}{Study of degeneracies in pulsar noise analysis}
+\newcommand{\advisorEN}{Prof. Alberto Sesana}
+\newcommand{\coadvisorEN}{Dr. Irene Ferranti}
+\newcommand{\defenseDateEN}{23--25 November 2026}
+\newcommand{\degreeCourseEN}{Physics}
+\newcommand{\phoneEN}{+39 3391306307}
+
+\begin{document}
+\thispagestyle{empty}
+
+%========================================================================================
+%  SINTESI IN ITALIANO
+%========================================================================================
+\chapter*{Sintesi}
+\begin{center}
+\textbf{Nome e Cognome:} \nomeIT \, \cognomeIT \\[0.3cm]
+\textbf{Matricola:} \matricolaIT \\[0.3cm]
+\textbf{Titolo (trad.):} \titoloTesiIT \\[0.3cm]
+\textbf{Relatore:} \relatoreIT \\[0.3cm]
+\textbf{Correlatrice:} \correlatoreIT \\[0.3cm]
+\textbf{Data della Prova Finale:} \dataSedutaIT \\[0.3cm]
+\textbf{Corso di Laurea:} \corsoDiLaureaIT \\[0.3cm]
+\textbf{Recapito Telefonico:} \recapitoTelefonicoIT \\
+\end{center}
+
+\vspace{1cm}
+\sloppy
+
+\noindent
+Le \textit{millisecond pulsar} (MSP) sono stelle di neutroni in rapida rotazione che
+emettono impulsi radio con una regolarità paragonabile a quella degli orologi
+atomici. Un'onda gravitazionale che attraversa lo spazio tra la Terra e una pulsar
+perturba il tempo di percorrenza degli impulsi, che arrivano leggermente in
+anticipo o in ritardo rispetto a quanto previsto. Monitorando per decenni i
+\textit{times of arrival} (TOA) degli impulsi di un insieme di pulsar, un
+\textit{Pulsar Timing Array} (PTA), è quindi possibile osservare onde gravitazionali
+con frequenze dell'ordine dei nanohertz ($10^{-9}$--$10^{-7}$\,Hz). \par
+
+In questa banda la sorgente principale attesa è il fondo stocastico di onde
+gravitazionali (\textit{Gravitational Wave Background}, GWB), prodotto dalla
+sovrapposizione incoerente dei segnali emessi dalla popolazione di binarie di buchi
+neri supermassicci. Il GWB si manifesta come un segnale a bassa frequenza comune a
+tutte le pulsar e correlato tra di esse in modo caratteristico; nel 2023 diverse
+collaborazioni, tra cui lo \textit{European Pulsar Timing Array} (EPTA), ne hanno
+riportato una prima evidenza. \par
+
+La rivelazione del GWB è tuttavia resa difficile dalle numerose sorgenti di rumore
+presenti nei TOA degli impulsi: irregolarità nella rotazione della pulsar
+(\textit{red noise}, RN), variazioni della densità di elettroni lungo la linea di
+vista (\textit{dispersion measure}, DM) e diffusione degli impulsi nel mezzo
+interstellare (\textit{scattering}). Questi processi producono nei residui di
+timing un rumore ``rosso'', con più potenza alle basse frequenze, descritto dalla
+stessa forma spettrale a legge di potenza del GWB. In una singola pulsar il
+segnale gravitazionale è quindi difficilmente distinguibile dal rumore, e le
+diverse componenti del modello di rumore possono risultare degeneri tra loro.
+Un modello di rumore accurato è perciò essenziale, perché un GWB potrebbe essere
+assorbito dal rumore della pulsar o, al contrario, imitato da esso. \par
+
+Il mio lavoro di tesi si è concentrato sullo studio delle degenerazioni tra i
+parametri del modello di rumore di una singola pulsar, PSR~J1640+2224, inclusa
+nella seconda \textit{data release} dello \textit{European Pulsar Timing Array}
+(EPTA DR2). Per lo studio sono stati analizzati sia i dati reali sia dati simulati
+in modo realistico. \par
+
+L'analisi è stata svolta su due versioni dei dati di J1640+2224: DR2new+, che
+contiene solo le osservazioni EPTA acquisite con la strumentazione più recente,
+e DR2low, che le combina con osservazioni a bassa frequenza (30--200\,MHz) dei
+radiotelescopi LOFAR e NenuFAR. Il rumore bianco è stato fissato al
+\textit{maximum likelihood value} ottenuto da analisi precedenti a questa tesi,
+mentre i processi rossi sono descritti con sei parametri liberi, un'ampiezza e un
+indice spettrale per ciascuno tra red noise, variazioni di DM e scattering.
+L'inferenza bayesiana è stata condotta con Discovery, un nuovo codice basato su
+JAX: il confronto tra i due dataset mostra che solo con DR2low, grazie alla
+copertura in frequenza, i parametri del rumore cromatico risultano vincolati. Su
+DR2low le posterior di Discovery coincidono con quelle ottenute con Enterprise, il
+codice di riferimento della comunità, e mostrano una marcata degenerazione tra DM
+e scattering. Questa degenerazione crea una \textit{posterior distribution}
+bimodale nei parametri della DM, con un picco che contiene il \textit{maximum
+likelihood value} ad ampiezza bassa ($\log_{10}A \sim -15$) e \textit{spectral
+index} $\gamma \sim 4$, e un picco ad ampiezza più elevata e \textit{spectral
+index} più basso. Inoltre genera una \textit{joint posterior} fra DM e scattering
+con forma a ``L'', sintomo, appunto, del fatto che le due componenti non vengono
+correttamente separate. Attraverso l'analisi di simulazioni realistiche,
+l'obiettivo di questa tesi è capire se componenti di rumore non modellate, ma
+presenti nei dati, possano generare questa degenerazione. \par
+
+Assumendo che un GWB sia presente nei dati, questo rappresenta un red noise
+acromatico aggiuntivo rispetto a quello generato dalle irregolarità nella
+rotazione della pulsar. Per studiarne l'effetto ho simulato dati con le stesse
+caratteristiche di J1640+2224, iniettando un fondo con $\gamma = 13/3$ e ampiezze
+comprese tra $\log_{10}A = -15.5$ e $-14$ (compatibili con le attuali misure dei
+PTA), e li ho analizzati con il modello a sei parametri (RN, DM e scattering)
+privo del termine di GWB. Per $\log_{10}A = -14$ il segnale provoca una
+degenerazione fra DM e scattering con caratteristiche simili a quelle osservate
+nei dati, seppur con significatività molto inferiore. \par
+
+Ho inoltre incluso un termine di \textit{band noise}, un processo rosso che agisce
+solo sui TOA della banda LOFAR. Analizzando simulazioni in cui il band noise è
+iniettato, ma non modellato, ottengo che questo rumore genera un bias in tutti i
+processi, ma soprattutto nella \textit{posterior distribution} della DM, che si
+sposta verso ampiezze più alte e \textit{spectral index} più bassi rispetto ai
+valori iniettati. La presenza di un band noise non modellato crea dunque un picco
+ad ampiezze e \textit{spectral index} compatibili con il picco secondario delle
+\textit{posterior distribution} ottenute con i dati reali. Inoltre, le simulazioni
+mostrano che, a causa dell'elevato rumore bianco dei dati LOFAR, questo processo è
+rilevabile solo per ampiezze $\log_{10}A \gtrsim -12.5$; sui dati reali se ne
+ottiene solo un limite superiore, simile a quello che si ottiene sui dati simulati
+iniettando un band noise con $\log_{10}A \sim -12.5$. Di conseguenza, la presenza
+di band noise nei dati reali non può essere esclusa e la sua ricerca sarà oggetto
+di studi futuri. \par
+
+In conclusione, l'analisi di J1640+2224 mostra che Discovery riproduce i
+risultati di Enterprise e che la stima del rumore di questa pulsar è dominata
+dalla degenerazione tra le due componenti cromatiche, DM e scattering, che solo
+una buona copertura in frequenza radio permette di ridurre. Le simulazioni
+indicano inoltre che un GWB di ampiezza paragonabile a quella oggi osservata, se
+non modellato, può causare una degenerazione fra DM e scattering, e che un band
+noise non modellato può generare un forte bias nei parametri della DM. Questi
+risultati sottolineano l'importanza di una modellizzazione dettagliata del rumore
+delle singole pulsar, presupposto essenziale per la rivelazione del GWB con i PTA.
+\par
+
+%========================================================================================
+%  ABSTRACT IN INGLESE
+%========================================================================================
+\newpage
+\chapter*{Abstract}
+\begin{center}
+\textbf{Name and Surname:} \nameEN \, \surnameEN \\[0.3cm]
+\textbf{Student ID:} \matricolaEN \\[0.3cm]
+\textbf{Title:} \thesisTitleEN \\[0.3cm]
+\textbf{Advisor:} \advisorEN \\[0.3cm]
+\textbf{Co-advisor:} \coadvisorEN \\[0.3cm]
+\textbf{Date of Dissertation:} \defenseDateEN \\[0.3cm]
+\textbf{Degree Course:} \degreeCourseEN \\[0.3cm]
+\textbf{Phone Number:} \phoneEN \\
+\vspace{1cm}
+\end{center}
+\sloppy
+
+\noindent
+Millisecond pulsars (MSPs) are rapidly rotating neutron stars that emit radio
+pulses with a regularity comparable to that of atomic clocks. A gravitational
+wave crossing the space between the Earth and a pulsar perturbs the travel time
+of the pulses, which arrive slightly earlier or later than predicted. By
+monitoring for decades the times of arrival (TOAs) of the pulses from a set of
+pulsars, a Pulsar Timing Array (PTA), it is therefore possible to observe
+gravitational waves with frequencies of the order of nanohertz
+($10^{-9}$--$10^{-7}$\,Hz). \par
+
+In this band, the main expected source is the stochastic gravitational wave
+background (GWB), produced by the incoherent superposition of the signals
+emitted by the population of supermassive black hole binaries. The GWB appears
+as a low-frequency signal common to all pulsars and correlated among them in a
+characteristic way; in 2023 several collaborations, including the European
+Pulsar Timing Array (EPTA), reported first evidence for it. \par
+
+The detection of the GWB is, however, made difficult by the many noise sources
+affecting the pulse TOAs: irregularities in the rotation of the pulsar (red
+noise, RN), variations of the electron density along the line of sight
+(dispersion measure, DM), and scattering of the pulses in the interstellar
+medium. These processes produce a ``red'' noise in the timing residuals, with
+more power at low frequencies, described by the same power-law spectral shape as
+the GWB. In a single pulsar the gravitational signal is therefore hard to
+distinguish from the noise, and the different components of the noise model can
+be degenerate with one another. An accurate noise model is thus essential, since
+a GWB could be absorbed by the pulsar noise or, conversely, mimicked by it. \par
+
+My thesis work focused on the study of the degeneracies among the parameters of
+the noise model of a single pulsar, PSR~J1640+2224, included in the second data
+release of the European Pulsar Timing Array (EPTA DR2). Both the real data and
+realistically simulated data were analysed. \par
+
+The analysis was carried out on two versions of the J1640+2224 data: DR2new+,
+which contains only the EPTA observations taken with the most recent
+instrumentation, and DR2low, which combines them with low-frequency observations
+(30--200\,MHz) from the LOFAR and NenuFAR radio telescopes. The white noise was
+fixed to the maximum likelihood values obtained in analyses prior to this
+thesis, while the red processes were described by six free parameters, an
+amplitude and a spectral index for each of red noise, DM variations and
+scattering. The Bayesian inference was performed with Discovery, a new code
+based on JAX: the comparison between the two datasets shows that only with
+DR2low, thanks to its frequency coverage, the parameters of the chromatic noise
+are constrained. On DR2low, the posteriors obtained with Discovery coincide with
+those obtained with Enterprise, the reference code of the community, and show a
+strong degeneracy between DM and scattering. This degeneracy produces a bimodal
+posterior distribution for the DM parameters, with one peak, containing the
+maximum likelihood value, at low amplitude ($\log_{10}A \sim -15$) and spectral
+index $\gamma \sim 4$, and a second peak at higher amplitude and lower spectral
+index. It also produces an ``L''-shaped joint posterior between DM and
+scattering, a sign that the two components are not correctly separated. Through
+the analysis of realistic simulations, the aim of this thesis is to understand
+whether noise components that are present in the data but not modelled can
+generate this degeneracy. \par
+
+If a GWB is present in the data, it represents an additional achromatic red
+noise on top of the one generated by the rotational irregularities of the
+pulsar. To study its effect, I simulated data with the same characteristics as
+J1640+2224, injecting a background with $\gamma = 13/3$ and amplitudes between
+$\log_{10}A = -15.5$ and $-14$ (consistent with current PTA measurements), and
+analysed them with the six-parameter model (RN, DM and scattering) without a
+GWB term. For $\log_{10}A = -14$, the signal induces a degeneracy between DM and
+scattering with features similar to those observed in the data, albeit with a
+much lower significance. \par
+
+I also included a band noise term, a red process acting only on the TOAs of the
+LOFAR band. By analysing simulations in which the band noise is injected but not
+modelled, I find that this noise biases all the processes, and most of all the
+DM posterior distribution, which shifts towards higher amplitudes and lower
+spectral indices with respect to the injected values. An unmodelled band noise
+therefore produces a peak at amplitudes and spectral indices consistent with the
+secondary peak of the posterior distributions obtained from the real data.
+Moreover, the simulations show that, because of the high white noise of the
+LOFAR data, this process is detectable only for amplitudes
+$\log_{10}A \gtrsim -12.5$; on the real data only an upper limit is obtained,
+similar to the one obtained on simulated data with an injected band noise of
+$\log_{10}A \sim -12.5$. Consequently, the presence of band noise in the real
+data cannot be excluded, and its search will be the subject of future work. \par
+
+In conclusion, the analysis of J1640+2224 shows that Discovery reproduces the
+results of Enterprise and that the noise estimate for this pulsar is dominated
+by the degeneracy between the two chromatic components, DM and scattering, which
+only a good radio-frequency coverage can reduce. The simulations further
+indicate that a GWB with an amplitude comparable to the one currently observed
+can, if not modelled, cause a degeneracy between DM and scattering, and that an
+unmodelled band noise can strongly bias the DM parameters. These results
+highlight the importance of a detailed modelling of the noise of individual
+pulsars, an essential requirement for the detection of the GWB with PTAs. \par
+
+\end{document}
