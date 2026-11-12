@@ -68,8 +68,9 @@ For a monochromatic plane wave travelling along the $z$-axis, the solution then 
 
 Here $h_+$ and $h_\times$ are the amplitudes of the two independent
 polarizations of the wave: as for electromagnetic waves, only two polarization
-states are allowed. Since all the $t$ and $z$ components are zero, the wave
-only acts on the plane perpendicular to its direction of propagation. The $+$
+states are allowed. The wave propagates at the speed of light and, since all
+the $t$ and $z$ components are zero, it only acts on the plane perpendicular
+to its direction of propagation. The $+$
 polarization stretches distances along the $x$-axis while compressing them along
 the $y$-axis (and vice versa half a period later), whereas the $\times$
 polarization produces the same deformation rotated by $45^\circ$.
@@ -102,8 +103,8 @@ radiation is therefore the quadrupole term~\cite{Maggiore2008},
 where $Q_{ij}$ is the reduced (traceless) quadrupole moment of the mass density
 $\rho$ of the source.
 
-The most important sources of gravitational waves are binary systems of compact
-objects, whose orbital motion produces a time-varying quadrupole moment.
+The sources of gravitational waves (GWs) of interest for this thesis are
+binary systems of compact objects, whose orbital motion produces a time-varying quadrupole moment.
 For a binary on a circular orbit with orbital angular frequency
 $\omega_s$, the mass distribution returns to the same configuration after half
 an orbit, so that the quadrupole moment oscillates twice per orbital period.
@@ -116,7 +117,8 @@ frequency,
 \end{equation}
 
 Using Kepler's law to eliminate the orbital radius, the amplitude of the
-emitted wave, averaged over the orientations of the binary, can be written as~\cite{Taylor2021}
+emitted wave, averaged over all possible inclination and polarization angles,
+can be written as~\cite{Taylor2021}
 \begin{equation}
     h = \sqrt{\frac{32}{5}}\;
     \frac{(G\mathcal{M}_c)^{5/3}\,(\pi f_{\mathrm{gw}})^{2/3}}{c^4\, r}\, ,
@@ -128,7 +130,7 @@ components. At this order, the amplitude depends on the masses only through
 the combination $\mathcal{M}_c$.
 
 The total energy of the orbit can be written as a function
-of the gravitational-wave frequency,
+of the GW frequency,
 \begin{equation}
     E_{\mathrm{orb}} = -\frac{1}{2}\,\mathcal{M}_c
     \left(\pi G \mathcal{M}_c f_{\mathrm{gw}}\right)^{2/3}\, ,
@@ -141,7 +143,8 @@ formula, is
     \left(\frac{\pi G \mathcal{M}_c f_{\mathrm{gw}}}{c^3}\right)^{10/3}\, .
     \label{eq:potenza}
 \end{equation}
-Since the energy carried away by the waves is drawn from the orbit,
+Since the energy carried away by the waves reduces the bound energy of the
+binary,
 $P = -\mathrm{d}E_{\mathrm{orb}}/\mathrm{d}t$, combining these two equations
 gives the evolution of the frequency,
 \begin{equation}
@@ -149,16 +152,20 @@ gives the evolution of the frequency,
     \left(\frac{G\mathcal{M}_c}{c^3}\right)^{5/3} f_{\mathrm{gw}}^{11/3}\, .
     \label{eq:chirp}
 \end{equation}
-We note that binaries emitting at low frequencies evolve very slowly.
+Through the emission of GWs, binary systems lose bound energy and shrink their
+orbit until the two companions merge.
 
 Since the characteristic frequency of the emission scales inversely with the
 total mass of the system, the binaries emitting at the lowest frequencies are
 supermassive black hole binaries (SMBHBs), with masses of
-$10^{8}$--$10^{10}\,M_\odot$. Supermassive black holes reside at the centres of most galaxies and cannot be
+$10^{8}$--$10^{10}\,M_\odot$. Supermassive black holes are believed to
+reside at the centers of all massive galaxies and cannot be
 the product of stellar evolution. It is widely accepted that SMBHBs form as a
 natural consequence of galaxy mergers: when two galaxies merge, their central
 black holes form a binary system which, once it reaches separations of the
 order of milliparsecs, emits gravitational waves in the nanohertz band~\cite{Taylor2021,Sesana2008}.
+Since galaxies are expected to merge frequently in our Universe, a large
+population of SMBHBs emitting GWs in the nanohertz band is expected.
 
 
 \section{Stochastic gravitational wave background} \label{sec:GWB}
@@ -166,11 +173,12 @@ order of milliparsecs, emits gravitational waves in the nanohertz band~\cite{Tay
 A large population of compact binaries, such as SMBHBs, emitting at comparable
 frequencies and with comparable amplitudes cannot be resolved individually.
 The resulting signal is an incoherent superposition of the individual waves,
-which forms a stochastic gravitational wave background (GWB).
+which forms a stochastic background that we refer to as the gravitational
+wave background (GWB).
 A GWB is defined by the fact that the
 signal $h(t)$ is a random process, which cannot be described by a
 deterministic waveform but only statistically, through its ensemble averages.
-We will make the following assumptions on the GWB~\cite{Maggiore2008}:
+We will make the following assumptions on the GWB from SMBHBs~\cite{Maggiore2008}:
 \begin{itemize}
     \item \textbf{stationary}: its statistical properties do not change in time;
     \item \textbf{Gaussian}: it is fully characterized by its two-point correlator;
@@ -202,6 +210,6 @@ power law~\cite{Phinney2001,Taylor2021}
 where $A_{\mathrm{GWB}}$ is the amplitude at the reference frequency
 $f_{\mathrm{yr}} = 1\,\mathrm{yr}^{-1}$. While the spectral index is fixed by
 the physics of the individual binaries, the amplitude depends on the properties
-of the SMBHB population, and is of the order of $10^{-15}$~\cite{EPTA2023_GWB,NANOGrav2023,PPTA2023,CPTA2023}.
+of the SMBHB population, and is expected to be of the order of $10^{-15}$~\cite{EPTA2023_GWB,NANOGrav2023,PPTA2023,CPTA2023}.
 In Chapter~\ref{chpt:PTA} we will see how this strain spectrum translates into
 a red noise process in the timing residuals, common to all pulsars.

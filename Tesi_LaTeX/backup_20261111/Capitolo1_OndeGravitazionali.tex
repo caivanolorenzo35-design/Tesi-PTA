@@ -1,0 +1,207 @@
+% !TEX root = ../main.tex
+\chapter{Gravitational waves} \label{chpt:GW}
+
+    \section{Gravitational waves in linearized general relativity}
+
+    In general relativity, the geometry of spacetime, described by the metric
+    $g_{\mu\nu}$, is related to the distribution of matter and energy through
+    Einstein's field equations:
+    \begin{equation}
+        G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2} R\, g_{\mu\nu} = 8\pi\, T_{\mu\nu} \, ,
+        \label{eq:einstein}
+    \end{equation}
+    where $G_{\mu\nu}$ is the Einstein tensor, $R_{\mu\nu} \equiv R^{\lambda}{}_{\mu\lambda\nu}$
+    is the Ricci tensor,
+    $R = g^{\mu\nu} R_{\mu\nu}$ is the Ricci scalar, and $T_{\mu\nu}$ is the
+    stress-energy tensor~\cite{Maggiore2008}.
+
+    In the weak-field limit, the metric can be
+    written as a small perturbation of the flat Minkowski spacetime:
+    \begin{equation}
+        g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}\, , \qquad |h_{\mu\nu}| \ll 1\, ,
+        \label{eq:metrica_perturbata}
+    \end{equation}
+    where $\eta_{\mu\nu} = \mathrm{diag}(-1, 1, 1, 1)$ is the Minkowski metric and
+    $h_{\mu\nu}$ is a small tensor perturbation of the metric. To first order in
+    $h_{\mu\nu}$, indices are raised and lowered with $\eta_{\mu\nu}$.
+
+    We introduce the trace-reversed perturbation
+    \begin{equation}
+        \bar h_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu} h \, ,
+        \qquad h = \eta^{\mu\nu}h_{\mu\nu}\, .
+        \label{eq:trace_reversed}
+    \end{equation}
+    Expanding the Einstein tensor to first order in $h_{\mu\nu}$ and using the
+    Lorenz gauge $\partial^{\mu}\bar h_{\mu\nu} = 0$, the field equations become
+    \begin{equation}
+        \Box\, \bar h_{\mu\nu} = -16\pi\, T_{\mu\nu}\, ,
+        \label{eq:einstein_linearizzata}
+    \end{equation}
+    where $\Box = \eta^{\mu\nu}\partial_\mu\partial_\nu$ is the flat-space d'Alembert operator.
+
+    Far from the source, Eq.~\eqref{eq:einstein_linearizzata} becomes
+    \begin{equation}
+        \Box\, \bar h_{\mu\nu} = 0\, ,
+        \label{eq:onde_vuoto}
+    \end{equation}
+    which is a wave equation whose solutions propagate at the speed of light.
+
+    In vacuum, the residual gauge freedom can also be used to impose the
+    transverse-traceless (TT) gauge, defined by
+\begin{equation}
+    h_{0\mu} = 0\, , \qquad h^{i}{}_{i} = 0\, , \qquad \partial^{j} h_{ij} = 0\, .
+    \label{eq:gauge_TT}
+\end{equation}
+In the TT gauge the perturbation is traceless, so that $\bar h_{\mu\nu} = h_{\mu\nu}$.
+For a monochromatic plane wave travelling along the $z$-axis, the solution then takes the form
+\begin{equation}
+    h_{\mu\nu}^{\mathrm{TT}}(t,z) =
+    \begin{pmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & h_+ & h_\times & 0 \\
+        0 & h_\times & -h_+ & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+    \cos\left[\omega(t - z)\right] .
+    \label{eq:onda_piana_TT}
+\end{equation}
+
+Here $h_+$ and $h_\times$ are the amplitudes of the two independent
+polarizations of the wave: as for electromagnetic waves, only two polarization
+states are allowed. Since all the $t$ and $z$ components are zero, the wave
+only acts on the plane perpendicular to its direction of propagation. The $+$
+polarization stretches distances along the $x$-axis while compressing them along
+the $y$-axis (and vice versa half a period later), whereas the $\times$
+polarization produces the same deformation rotated by $45^\circ$.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure/cap1/polarizzazioni.pdf}
+    \caption{\footnotesize Deformation of a ring of test masses in the $xy$ plane
+    over one period, for a gravitational wave propagating along $z$ with
+        polarization $+$ (top) and $\times$ (bottom).}
+    \label{fig:polarizzazioni}
+\end{figure}
+
+
+
+\section{Gravitational waves from binary systems} \label{sec:GW_binarie}
+
+As in electromagnetism, the radiation field of a source can be expanded in
+multipoles. We consider a source far from the observer and moving slowly
+($v \ll c$). The monopole and dipole terms make no contribution to the radiation, as a
+consequence of stress-energy conservation, which implies the conservation of
+the total mass-energy and of the total momentum of the system, respectively. The leading contribution to the
+radiation is therefore the quadrupole term~\cite{Maggiore2008},
+\begin{equation}
+    h_{ij}^{\mathrm{TT}} \sim \frac{2G}{c^4}\,\frac{\ddot{Q}_{ij}}{r}\, ,
+    \qquad
+    Q_{ij} = \int \mathrm{d}^3x\, \rho \left( x_i x_j - \frac{1}{3}\, |\mathbf{x}|^2 \delta_{ij} \right) ,
+    \label{eq:quadrupolo}
+\end{equation}
+where $Q_{ij}$ is the reduced (traceless) quadrupole moment of the mass density
+$\rho$ of the source.
+
+The most important sources of gravitational waves are binary systems of compact
+objects, whose orbital motion produces a time-varying quadrupole moment.
+For a binary on a circular orbit with orbital angular frequency
+$\omega_s$, the mass distribution returns to the same configuration after half
+an orbit, so that the quadrupole moment oscillates twice per orbital period.
+As a consequence, gravitational waves are emitted at twice the orbital
+frequency,
+\begin{equation}
+    \omega_{\mathrm{gw}} = 2\,\omega_s\, , \qquad \Rightarrow \qquad
+    f_{\mathrm{gw}} = \frac{\omega_{\mathrm{gw}}}{2\pi} = 2 f_{\mathrm{orb}}\, .
+    \label{eq:fgw}
+\end{equation}
+
+Using Kepler's law to eliminate the orbital radius, the amplitude of the
+emitted wave, averaged over the orientations of the binary, can be written as~\cite{Taylor2021}
+\begin{equation}
+    h = \sqrt{\frac{32}{5}}\;
+    \frac{(G\mathcal{M}_c)^{5/3}\,(\pi f_{\mathrm{gw}})^{2/3}}{c^4\, r}\, ,
+    \label{eq:ampiezza_binaria}
+\end{equation}
+where $r$ is the distance to the source and
+$\mathcal{M}_c = (m_1 m_2)^{3/5}/(m_1 + m_2)^{1/5}$ is the chirp mass of the binary, with $m_1$ and $m_2$ the masses of the two
+components. At this order, the amplitude depends on the masses only through
+the combination $\mathcal{M}_c$.
+
+The total energy of the orbit can be written as a function
+of the gravitational-wave frequency,
+\begin{equation}
+    E_{\mathrm{orb}} = -\frac{1}{2}\,\mathcal{M}_c
+    \left(\pi G \mathcal{M}_c f_{\mathrm{gw}}\right)^{2/3}\, ,
+    \label{eq:E_orb}
+\end{equation}
+while the power radiated in gravitational waves, obtained from the quadrupole
+formula, is
+\begin{equation}
+    P = \frac{32}{5}\,\frac{c^5}{G}
+    \left(\frac{\pi G \mathcal{M}_c f_{\mathrm{gw}}}{c^3}\right)^{10/3}\, .
+    \label{eq:potenza}
+\end{equation}
+Since the energy carried away by the waves is drawn from the orbit,
+$P = -\mathrm{d}E_{\mathrm{orb}}/\mathrm{d}t$, combining these two equations
+gives the evolution of the frequency,
+\begin{equation}
+    \dot f_{\mathrm{gw}} = \frac{96}{5}\,\pi^{8/3}
+    \left(\frac{G\mathcal{M}_c}{c^3}\right)^{5/3} f_{\mathrm{gw}}^{11/3}\, .
+    \label{eq:chirp}
+\end{equation}
+We note that binaries emitting at low frequencies evolve very slowly.
+
+Since the characteristic frequency of the emission scales inversely with the
+total mass of the system, the binaries emitting at the lowest frequencies are
+supermassive black hole binaries (SMBHBs), with masses of
+$10^{8}$--$10^{10}\,M_\odot$. Supermassive black holes reside at the centres of most galaxies and cannot be
+the product of stellar evolution. It is widely accepted that SMBHBs form as a
+natural consequence of galaxy mergers: when two galaxies merge, their central
+black holes form a binary system which, once it reaches separations of the
+order of milliparsecs, emits gravitational waves in the nanohertz band~\cite{Taylor2021,Sesana2008}.
+
+
+\section{Stochastic gravitational wave background} \label{sec:GWB}
+
+A large population of compact binaries, such as SMBHBs, emitting at comparable
+frequencies and with comparable amplitudes cannot be resolved individually.
+The resulting signal is an incoherent superposition of the individual waves,
+which forms a stochastic gravitational wave background (GWB).
+A GWB is defined by the fact that the
+signal $h(t)$ is a random process, which cannot be described by a
+deterministic waveform but only statistically, through its ensemble averages.
+We will make the following assumptions on the GWB~\cite{Maggiore2008}:
+\begin{itemize}
+    \item \textbf{stationary}: its statistical properties do not change in time;
+    \item \textbf{Gaussian}: it is fully characterized by its two-point correlator;
+    \item \textbf{isotropic}: its statistical properties are the same in every direction;
+    \item \textbf{unpolarized}: the two polarizations are uncorrelated and have the same intensity.
+\end{itemize}
+
+Under these assumptions, the background is completely characterized by a
+single function of frequency, its one-sided power spectral density (PSD)
+$S_h(f)$, which describes how the power of the signal is distributed in
+frequency. From $S_h(f)$ it is convenient to define the characteristic strain~\cite{Taylor2021}
+\begin{equation}
+    h_c(f) = \sqrt{f\,S_h(f)}\,,
+    \label{eq:hc}
+\end{equation}
+a dimensionless quantity that can be directly compared with the strain
+amplitudes of individual sources discussed in Section~\ref{sec:GW_binarie}.
+
+Assuming that all binaries are on circular orbits and that their evolution is
+driven only by the emission of gravitational waves, the energy radiated per
+logarithmic frequency interval follows from Eqs.~\eqref{eq:potenza} and
+\eqref{eq:chirp}, \mbox{$f_{\mathrm{gw}}\,P/\dot f_{\mathrm{gw}} \propto f_{\mathrm{gw}}^{2/3}$}. Summing over the whole
+population, the characteristic strain spectrum of the background follows the
+power law~\cite{Phinney2001,Taylor2021}
+\begin{equation}
+    h_c(f) = A_{\mathrm{GWB}} \left(\frac{f}{f_{\mathrm{yr}}}\right)^{-2/3} ,
+    \label{eq:hc_powerlaw}
+\end{equation}
+where $A_{\mathrm{GWB}}$ is the amplitude at the reference frequency
+$f_{\mathrm{yr}} = 1\,\mathrm{yr}^{-1}$. While the spectral index is fixed by
+the physics of the individual binaries, the amplitude depends on the properties
+of the SMBHB population, and is of the order of $10^{-15}$~\cite{EPTA2023_GWB,NANOGrav2023,PPTA2023,CPTA2023}.
+In Chapter~\ref{chpt:PTA} we will see how this strain spectrum translates into
+a red noise process in the timing residuals, common to all pulsars.

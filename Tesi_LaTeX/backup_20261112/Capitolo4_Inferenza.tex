@@ -1,0 +1,213 @@
+% !TEX root = ../main.tex
+\chapter{Bayesian inference and analysis tools} \label{chpt:inferenza}
+
+The noise model described in Chapter~\ref{chpt:rumore} depends on a small
+number of parameters, the amplitudes and spectral indices of the noise
+processes. In this chapter we describe how these parameters are estimated from
+the timing residuals. We first introduce Bayesian inference, then the
+likelihood used in pulsar timing analysis, and finally the method used to
+sample the posterior distribution.
+
+\section{Bayesian inference} \label{sec:bayes}
+
+In Bayesian inference, the result of a measurement is the posterior
+distribution $p(\bm{\theta}|\delta\bm{t})$, that is, the probability density
+of the model parameters $\bm{\theta}$ given the data, which in our case are the
+timing residuals $\delta\bm{t}$. The posterior is given by Bayes' theorem,
+\begin{equation}
+    p(\bm{\theta}|\delta\bm{t}) =
+    \frac{\mathcal{L}(\delta\bm{t}|\bm{\theta})\,\pi(\bm{\theta})}{\mathcal{Z}},
+    \label{eq:bayes}
+\end{equation}
+where $\mathcal{L}(\delta\bm{t}|\bm{\theta})$ is the likelihood, the
+probability density of the data given the parameters, and $\pi(\bm{\theta})$ is
+the prior, which describes what we know about the parameters before the
+measurement. The denominator is the evidence,
+\begin{equation}
+    \mathcal{Z} = \int \mathcal{L}(\delta\bm{t}|\bm{\theta})\,
+    \pi(\bm{\theta})\,\dd\bm{\theta},
+    \label{eq:evidence}
+\end{equation}
+which does not depend on $\bm{\theta}$. For parameter estimation it is only a
+normalization constant, while it becomes important when different models are
+compared. % , as discussed in Section~\ref{sec:model_selection}.  [rimando alla 4.4, commentata]
+
+In the reference model of this work the free parameters are the amplitudes and
+spectral indices of the intrinsic red noise, of the DM variations and of the
+scattering variations, modeled with $54$, $40$ and $40$ Fourier components
+respectively. For all the amplitudes we use a prior uniform in $\log_{10}A$
+between $-20$ and $-11$, and for all the spectral indices a uniform prior
+between $0$ and $7$. A prior uniform in the logarithm is the usual choice for
+a quantity whose order of magnitude is not known. The same priors are used for
+the band noise, and when the chromatic index $\alpha$ is left free its prior is
+uniform between $0$ and $10$.
+
+The posterior is a function of all the parameters. To study a single parameter
+$\theta_i$ we integrate the posterior over all the others, obtaining the
+marginalized posterior
+\begin{equation}
+    p(\theta_i|\delta\bm{t}) = \int p(\bm{\theta}|\delta\bm{t})
+    \prod_{k\neq i}\dd\theta_k .
+    \label{eq:marginal}
+\end{equation}
+In this way the uncertainty on the other parameters is included in the result
+for $\theta_i$. In particular, if two parameters are covariant, marginalizing
+over one of them broadens the posterior of the other.
+
+\section{The pulsar timing likelihood} \label{sec:likelihood}
+
+To write the likelihood we need a model for the timing residuals. We write
+them as the sum of three contributions,
+\begin{equation}
+    \delta\bm{t} = \bm{M}\bm{\epsilon} + \bm{F}\bm{a} + \bm{n}_{\rm WN}.
+    \label{eq:modello_residui}
+\end{equation}
+The first term accounts for the timing model. The timing model parameters are
+obtained from a fit performed before the noise analysis, and this fit may have
+absorbed part of the noise. Since the corrections are small, the timing model
+is linearized around the best-fit values. The design matrix $\bm{M}$ contains
+the derivatives of the TOAs with respect to the timing model parameters, and
+$\bm{\epsilon}$ is the vector of the small offsets of these parameters from
+their best-fit values. The second term contains the red noise processes of
+Chapter~\ref{chpt:rumore}. The columns of $\bm{F}$ are the sines and cosines of
+Eq.~\eqref{eq:fourier}, multiplied by the chromatic factor of
+Eq.~\eqref{eq:chrom} for the chromatic processes, and $\bm{a}$ is the vector of
+the Fourier coefficients $a_k$ and $b_k$ of all the processes. The last term,
+$\bm{n}_{\rm WN}$, is the white noise. It is Gaussian with covariance matrix
+$\bm{C}_{\rm WN}$, whose diagonal elements are the variances $\sigma_i^2$ of
+Eq.~\eqref{eq:sigma_wn}, while ECORR adds a correlation between the TOAs of
+the same LOFAR system observed at the same epoch.
+
+For fixed $\bm{\epsilon}$ and $\bm{a}$, the quantity
+$\delta\bm{t} - \bm{M}\bm{\epsilon} - \bm{F}\bm{a}$ is only white noise, so the
+likelihood is a Gaussian. However, we are not interested in the values of
+$\bm{\epsilon}$ and $\bm{a}$, which describe one particular realization of the
+noise, but in the parameters $\bm{\theta}$ of the power spectral densities.
+The coefficients $\bm{a}$ have a Gaussian prior with the variances of
+Eq.~\eqref{eq:varianza_coeff}, which depend on $\bm{\theta}$ through the PSD,
+while for $\bm{\epsilon}$ we use a uniform prior. With these choices the
+integral over $\bm{\epsilon}$ and $\bm{a}$ can be computed analytically, and
+the result is again a Gaussian,
+\begin{equation}
+    \mathcal{L}(\delta\bm{t}|\bm{\theta}) =
+    \frac{\exp\left(-\frac{1}{2}\,\delta\bm{t}^{T}\bm{C}^{-1}\delta\bm{t}\right)}
+    {\sqrt{\det(2\pi\bm{C})}},
+    \label{eq:likelihood}
+\end{equation}
+with covariance matrix
+\begin{equation}
+    \bm{C}(\bm{\theta}) = \bm{C}_{\rm WN} + \bm{F}\,\bm{\Phi}(\bm{\theta})\,\bm{F}^{T},
+    \label{eq:covarianza}
+\end{equation}
+where $\bm{\Phi}$ is the diagonal matrix of the variances of
+Eq.~\eqref{eq:varianza_coeff}. The marginalization over $\bm{\epsilon}$ adds to
+$\bm{C}$ a term of the same form for the timing model, with $\bm{M}$ in place
+of $\bm{F}$ and a very large variance, which corresponds to the uniform prior.
+
+This marginalized likelihood depends only on $\bm{\theta}$. Since the white
+noise parameters are fixed, in the reference model it is a function of six
+parameters.
+
+\section{Sampling the posterior} \label{sec:mcmc}
+
+The posterior of Eq.~\eqref{eq:bayes} cannot be computed analytically, and
+evaluating it on a grid becomes too expensive as the number of parameters
+grows. We therefore use a Markov chain Monte Carlo (MCMC) method, which
+produces a chain of samples of $\bm{\theta}$ distributed according to the
+posterior. The marginalized posterior of a parameter is then simply the
+histogram of its samples.
+
+The chain is built with the Metropolis--Hastings algorithm. It starts from a
+point drawn from the prior. At each iteration a new point is proposed, and the
+posterior at the proposed point is compared with the posterior at the current
+one. If it is larger the move is accepted, otherwise it is accepted with
+probability equal to the ratio of the two values. If the move is rejected, the
+chain stays at the current point. Since only ratios of the posterior are
+needed, the evidence does not have to be computed. We use the
+\textsc{PTMCMCSampler} package, which combines several proposal distributions
+that are adapted during the run using the previous samples of the chain.
+
+Each chain consists of $10^6$ iterations, of which one sample every $10$ is
+saved. The first part of the chain depends on the starting point and does not
+represent the posterior, so we discard the first $25\%$ of the samples as
+burn-in.
+
+Consecutive samples of the chain are correlated, so the number of independent
+samples is smaller than the length of the chain. The correlation is measured
+by the integrated autocorrelation time $\tau_{\rm ac}$, expressed in units of
+saved samples, which we estimate for each parameter. The effective number of
+samples is then
+\begin{equation}
+    N_{\rm eff} = \frac{N_{\rm s}}{\max_i \tau_{{\rm ac},i}},
+    \label{eq:neff}
+\end{equation}
+where $N_{\rm s}$ is the number of samples left after the burn-in and the
+maximum is taken over the parameters. We use $N_{\rm eff}$ to check that the
+chain is long enough.
+
+The results are shown as corner plots. The panels on the diagonal show the
+marginalized posterior of each parameter, and the other panels show the
+two-dimensional marginalized posterior of each pair of parameters, with
+contours enclosing $68\%$, $95\%$ and $99.7\%$ of the probability. The
+two-dimensional panels show the covariance between the parameters, and are
+therefore the main tool to identify degeneracies.
+
+% ===== SEZIONE 4.4 COMMENTATA (11/11/2026): da rivalutare, forse va nel cap. 6 =====
+% \section{Model comparison} \label{sec:model_selection}
+%
+% To compare two models we use the evidence of Eq.~\eqref{eq:evidence}. The
+% ratio of the evidences of two models is the Bayes factor,
+% \begin{equation}
+%     \mathcal{B}_{12} = \frac{\mathcal{Z}_1}{\mathcal{Z}_2},
+%     \label{eq:bayes_factor}
+% \end{equation}
+% which tells how much the data favor model 1 over model 2, if the two models
+% are considered equally probable before the measurement. Since the evidence is
+% the likelihood averaged over the prior, a model with additional parameters is
+% favored only if it fits the data better by an amount that compensates for its
+% larger prior volume.
+%
+% The evidence is an integral over the whole parameter space, and it is not
+% provided by the MCMC sampler. When one model is contained in the other,
+% however, the Bayes factor can be obtained from the posterior alone. This is
+% the case of the band noise. The model with band noise reduces to the model
+% without it when the amplitude $A_{\rm BN}$ is negligible, which in practice
+% corresponds to the lower bound of its prior, $\log_{10}A_{\rm BN} = -20$. The
+% Bayes factor of the model without band noise over the model with band noise
+% is then given by the Savage--Dickey density ratio,
+% \begin{equation}
+%     \mathcal{B} = \frac{p(\log_{10}A_{\rm BN} = -20\,|\,\delta\bm{t})}
+%     {\pi(\log_{10}A_{\rm BN} = -20)},
+%     \label{eq:savage_dickey}
+% \end{equation}
+% where the numerator is the marginalized posterior and the denominator is the
+% prior, both evaluated in the model with band noise. If the data require the
+% band noise, the posterior at the lower bound is smaller than the prior and
+% $\mathcal{B} < 1$. If instead $\mathcal{B} \simeq 1$, the data cannot
+% distinguish between the two models. We estimate the numerator from the
+% fraction of samples in the lowest unit interval of the prior,
+% $-20 < \log_{10}A_{\rm BN} < -19$.
+% ===== FINE SEZIONE 4.4 COMMENTATA =====
+
+\section{Enterprise and Discovery} \label{sec:software}
+
+The likelihood of Eq.~\eqref{eq:likelihood} is implemented in
+\textsc{Enterprise}, the software commonly used in PTA analyses, which was
+also used for the noise analysis of the DR2low dataset. It is written in
+Python and relies on the NumPy and SciPy libraries for its linear algebra
+operations. \textsc{Discovery} is a more recent package that implements the
+same likelihood with the JAX library.
+
+JAX is a Python library for numerical computing. A function written with JAX
+can be compiled just in time, that is, it is translated into optimized code the
+first time it is called, so that the following calls are much faster. JAX
+functions can also be differentiated automatically and executed on graphics
+processing units (GPUs). In this work we use only the first feature. The
+likelihood is compiled and evaluated on CPUs in double precision, and its
+gradient is not needed by the Metropolis--Hastings algorithm.
+
+In Chapter~\ref{chpt:validazione} we compare the posteriors obtained with the
+two codes for the same model and the same priors. Since both analyses use
+\textsc{PTMCMCSampler}, the comparison is a test of the implementation of the
+likelihood. The autocorrelation times are computed with the \textsc{emcee}
+package and the corner plots are made with the \textsc{corner} package.

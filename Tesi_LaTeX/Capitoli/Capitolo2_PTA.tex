@@ -49,16 +49,18 @@ finally compared with the predictions of a timing model, which describes the
 rotation of the pulsar together with its astrometric and, for binary systems,
 orbital parameters. In this work we use the timing solution of the EPTA DR2low
 dataset~\cite{Iraci2025}, which combines the EPTA second data
-release~\cite{EPTA2023_DR2data} with low-frequency observations from LOFAR. It
-was obtained by refitting the EPTA timing model to the combined data with
-software based on \textsc{tempo2}~\cite{Hobbs2006, Edwards2006}. The difference between
-the observed and the predicted TOAs defines the timing residuals,
+release~\cite{EPTA2023_DR2data} with low-frequency observations from LOFAR. The
+difference between the observed and the predicted TOAs defines the timing
+residuals,
 \begin{equation}
-    \delta t_i = t^{\rm obs}_{{\rm TOA},i} - t^{\rm model}_{{\rm TOA},i}.
+    \delta t_i = t^{\rm obs}_{{\rm TOA},i} - t^{\rm model}_{{\rm TOA},i}
+    = R(t_i) + n_i .
     \label{eq:residuals}
 \end{equation}
-Any effect not included in the timing model, such as noise processes or
-gravitational waves, leaves a signature in the residuals.
+Any effect not included in the timing model leaves a signature in the
+residuals. Here $R(t_i)$ is the contribution of the GWB, described in
+Section~\ref{sec:timingGW}, and $n_i$ is the contribution of the noise
+processes, described in Chapter~\ref{chpt:rumore}.
 Since the TOAs are typically collected every few weeks over a time span $T$ of
 one or two decades, PTAs are sensitive to signals with frequencies between about $1/T$,
 which is $1.6$\,nHz for $T = 20$\,yr, and the Nyquist frequency
@@ -103,8 +105,8 @@ For a stochastic background, $R(t)$ is itself a random process and cannot be
 predicted as a function of time. It is instead characterized by its power
 spectral density, which follows from the strain spectral density $S_h(f)$
 introduced in Section~\ref{sec:GWB}. Two factors relate the two quantities.
-Averaging the response of the Earth--pulsar system over all propagation
-directions of the background gives a factor $1/3$, while the time integral in
+Averaging the response of the Earth--pulsar system over all the sources
+contributing to the background gives a factor $1/3$, while the time integral in
 Eq.~\eqref{eq:R_GW} introduces a factor $1/(2\pi f)^2$. Using
 Eq.~\eqref{eq:hc}, the PSD of the timing residuals induced by the GWB is~\cite{Taylor2021}
 \begin{equation}
@@ -141,8 +143,7 @@ $S_{ij}(f) = \Gamma_{ij}\,S(f)$, with $S(f)$ given by Eq.~\eqref{eq:PSD_hc},
 so that for a single pulsar ($\Gamma_{ii} = 1$) Eq.~\eqref{eq:PSD_hc} is recovered.
 
 The Hellings--Downs curve is shown in Figure~\ref{fig:HD}. The correlation tends
-to $1/2$ for pulsars that are close on the sky, reaches a minimum of about
-$-0.15$ at $\zeta \simeq 82^\circ$, and rises again to $1/4$ for pulsars in
+to $1/2$ for pulsars that are close on the sky and to $1/4$ for pulsars in
 opposite directions. This angular pattern reflects the quadrupolar nature of
 gravitational waves and is the distinctive signature of a GWB.
 

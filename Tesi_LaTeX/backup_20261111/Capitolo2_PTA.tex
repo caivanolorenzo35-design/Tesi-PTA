@@ -1,0 +1,162 @@
+% !TEX root = ../main.tex
+\chapter{Pulsar Timing Array} \label{chpt:PTA}
+
+Pulsar timing arrays (PTAs)~\cite{Sazhin1978, Detweiler1979, FosterBacker1990} are currently the most sensitive method for detecting
+gravitational waves in the nanohertz band, where the signal is expected to be
+dominated by the population of supermassive black hole binaries (SMBHBs) discussed
+in Section~\ref{sec:GW_binarie}.
+
+\section{Pulsar timing} \label{sec:timing}
+
+The PTA technique relies on pulsars, which are rapidly
+rotating and highly magnetized neutron stars~\cite{Hewish1968} that emit beams of radio radiation along
+their magnetic axis. Pulsars are commonly classified according to their rotational
+period into classical pulsars, with periods of the order of one second, and
+millisecond pulsars (MSPs)~\cite{Backer1982}, with periods of a few milliseconds. MSPs have a much more stable rotation, which allows the
+times of arrival (TOAs) of their pulses to be measured with higher precision.
+
+The measurement of the TOAs involves several steps~\cite{LorimerKramer2005, Taylor2021}. The radio emission of the
+pulsar propagates through the ionized interstellar medium (ISM), whose refractive
+index depends on frequency. As a consequence, the signal suffers a
+frequency-dependent delay proportional to $\nu^{-2}$, where $\nu$ is the observing
+radio frequency, so that higher radio frequencies arrive earlier than
+lower ones.
+This dispersion can be corrected in two ways. In incoherent dedispersion, the
+observed band is divided into narrow frequency channels, and each channel is
+shifted in time according to the $\nu^{-2}$ law before summing them, so that the
+pulse is aligned across the whole band. In coherent dedispersion, the raw signal
+is instead convolved with the inverse transfer function of the ISM, which removes
+the dispersive delay exactly.
+
+Individual pulses are usually too weak to be distinguished from the background
+noise. To overcome this problem, the data are divided into segments of length
+equal to the pulsar period and summed together, a procedure known as folding.
+Since the pulsed signal always falls at the same rotational phase, it adds up
+coherently, while the noise averages out, so that the signal-to-noise ratio grows
+as the square root of the number of folded pulses. The result is an average pulse
+profile which, unlike individual pulses, is remarkably stable over time, and which
+is used to determine the TOA.
+
+The TOA is then obtained by cross-correlating the folded profile with a
+high signal-to-noise template of the same pulsar. The resulting phase shift,
+converted into time and added to the reference time of the observation, gives
+the arrival time of the pulse together with its uncertainty.
+
+Since the TOAs are measured at the observatory, which is not an inertial
+reference frame, they are then referred to the Solar System barycenter (SSB)
+through a series of clock and propagation corrections. The barycentric TOAs are
+finally compared with the predictions of a timing model, which describes the
+rotation of the pulsar together with its astrometric and, for binary systems,
+orbital parameters. In this work we use the timing solution of the EPTA DR2low
+dataset~\cite{Iraci2025}, which combines the EPTA second data
+release~\cite{EPTA2023_DR2data} with low-frequency observations from LOFAR. It
+was obtained by refitting the EPTA timing model to the combined data with
+software based on \textsc{tempo2}~\cite{Hobbs2006, Edwards2006}. The difference between
+the observed and the predicted TOAs defines the timing residuals,
+\begin{equation}
+    \delta t_i = t^{\rm obs}_{{\rm TOA},i} - t^{\rm model}_{{\rm TOA},i}.
+    \label{eq:residuals}
+\end{equation}
+Any effect not included in the timing model, such as noise processes or
+gravitational waves, leaves a signature in the residuals.
+Since the TOAs are typically collected every few weeks over a time span $T$ of
+one or two decades, PTAs are sensitive to signals with frequencies between about $1/T$,
+which is $1.6$\,nHz for $T = 20$\,yr, and the Nyquist frequency
+$1/(2\Delta t)$ set by the observing cadence $\Delta t$, which is about
+$4\times10^{-7}$\,Hz for observations every two weeks~\cite{Shaifullah2025}.
+As an example, Figure~\ref{fig:residuals} shows the timing residuals of
+PSR~J1640+2224, the pulsar analyzed in this work, in the DR2low dataset.
+The residuals at low radio frequencies have a much
+larger scatter, partly because of the larger TOA uncertainties and partly
+because the effects of the ISM are stronger at low frequencies, as discussed in
+Chapter~\ref{chpt:rumore}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure/cap2/residuals_J1640.pdf}
+    \caption{Timing residuals of PSR~J1640+2224 in the EPTA DR2low
+    dataset~\cite{Iraci2025}, for the LOFAR observations at
+    120--190\,MHz (top) and for the EPTA telescopes at 1.3--2.6\,GHz (bottom).
+    Note the different vertical scales.}
+    \label{fig:residuals}
+\end{figure}
+
+\section{Gravitational waves in pulsar timing} \label{sec:timingGW}
+
+A gravitational wave passing between the Earth and a pulsar perturbs the
+spacetime metric along the path of the radio pulses, slightly changing their
+travel time. As a result, the rate at which the pulses are received is shifted
+with respect to the intrinsic rotational frequency of the pulsar. This effect is
+described by the redshift~\cite{Detweiler1979, Maggiore2018, Taylor2021}
+\begin{equation}
+    z(t) \equiv \frac{\nu_0 - \nu(t)}{\nu_0},
+    \label{eq:redshift}
+\end{equation}
+where $\nu_0$ is the unperturbed pulse frequency and $\nu(t)$ the observed one.
+Since the TOAs accumulate this shift over time, the contribution of the
+gravitational wave to the timing residuals is given by its time integral,
+\begin{equation}
+    R(t) = \int_0^t z(t')\,dt'.
+    \label{eq:R_GW}
+\end{equation}
+For a stochastic background, $R(t)$ is itself a random process and cannot be
+predicted as a function of time. It is instead characterized by its power
+spectral density, which follows from the strain spectral density $S_h(f)$
+introduced in Section~\ref{sec:GWB}. Two factors relate the two quantities.
+Averaging the response of the Earth--pulsar system over all propagation
+directions of the background gives a factor $1/3$, while the time integral in
+Eq.~\eqref{eq:R_GW} introduces a factor $1/(2\pi f)^2$. Using
+Eq.~\eqref{eq:hc}, the PSD of the timing residuals induced by the GWB is~\cite{Taylor2021}
+\begin{equation}
+    S(f) = \frac{h_c^2(f)}{12\pi^2 f^3}.
+    \label{eq:PSD_hc}
+\end{equation}
+Inserting the power-law spectrum of Eq.~\eqref{eq:hc_powerlaw}, expected for a
+population of circular SMBHBs whose evolution is driven by GW emission, we obtain
+\begin{equation}
+    S(f) = \frac{\Agwb^2}{12\pi^2}\left(\frac{f}{\fyr}\right)^{-\gammagwb}\fyr^{-3},
+    \qquad \gammagwb = \frac{13}{3},
+    \label{eq:PSD_GWB}
+\end{equation}
+since $h_c^2/f^3 \propto f^{-4/3}\,f^{-3} = f^{-13/3}$.
+This PSD is a power law with the same functional form used to describe the
+intrinsic red noise of a pulsar. As a consequence, in the timing residuals of a
+single pulsar the GWB is indistinguishable from intrinsic red noise. The signal
+can only be identified by exploiting the fact that it is common to all the
+pulsars of the array and induces a specific correlation between their residuals.
+
+The correlation between the timing residuals of two pulsars $i$ and $j$ is
+described by the Hellings--Downs curve~\cite{HellingsDowns1983}. Under the assumptions introduced in
+Section~\ref{sec:GWB}, this correlation does not depend on the positions of the
+pulsars on the sky, but only on their angular separation $\zeta_{ij}$,
+\begin{equation}
+    \Gamma_{ij} = \frac{3}{2}\,x_{ij}\ln x_{ij} - \frac{x_{ij}}{4} + \frac{1}{2}
+    + \frac{1}{2}\,\delta_{ij},
+    \qquad x_{ij} = \frac{1-\cos\zeta_{ij}}{2},
+    \label{eq:HD}
+\end{equation}
+where $\delta_{ij}$ is the Kronecker delta.
+The cross-PSD of the residuals of pulsars $i$ and $j$ is then
+$S_{ij}(f) = \Gamma_{ij}\,S(f)$, with $S(f)$ given by Eq.~\eqref{eq:PSD_hc},
+so that for a single pulsar ($\Gamma_{ii} = 1$) Eq.~\eqref{eq:PSD_hc} is recovered.
+
+The Hellings--Downs curve is shown in Figure~\ref{fig:HD}. The correlation tends
+to $1/2$ for pulsars that are close on the sky, reaches a minimum of about
+$-0.15$ at $\zeta \simeq 82^\circ$, and rises again to $1/4$ for pulsars in
+opposite directions. This angular pattern reflects the quadrupolar nature of
+gravitational waves and is the distinctive signature of a GWB.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Figure/cap2/hellings_downs.pdf}
+    \caption{The Hellings--Downs curve of Eq.~\eqref{eq:HD}, giving the expected
+    correlation between the timing residuals of two distinct pulsars as a
+    function of their angular separation $\zeta$.}
+    \label{fig:HD}
+\end{figure}
+
+In 2023 four PTA collaborations, EPTA with InPTA, NANOGrav, PPTA and CPTA,
+reported evidence for a common red process with Hellings--Downs correlations~\cite{EPTA2023_GWB, NANOGrav2023, PPTA2023, CPTA2023}. Since the signal is weak
+and can be mimicked by the red noise of each pulsar, an accurate description of
+the pulsar noise is essential. The noise sources and their
+modeling are described in Chapter~\ref{chpt:rumore}.

@@ -30,7 +30,7 @@ measurement. The denominator is the evidence,
 \end{equation}
 which does not depend on $\bm{\theta}$. For parameter estimation it is only a
 normalization constant, while it becomes important when different models are
-compared, as discussed in Section~\ref{sec:model_selection}.
+compared. % , as discussed in Section~\ref{sec:model_selection}.  [rimando alla 4.4, commentata]
 
 In the reference model of this work the free parameters are the amplitudes and
 spectral indices of the intrinsic red noise, of the DM variations and of the
@@ -59,7 +59,7 @@ over one of them broadens the posterior of the other.
 To write the likelihood we need a model for the timing residuals. We write
 them as the sum of three contributions,
 \begin{equation}
-    \delta\bm{t} = \bm{M}\bm{\epsilon} + \bm{F}\bm{a} + \bm{n}.
+    \delta\bm{t} = \bm{M}\bm{\epsilon} + \bm{F}\bm{a} + \bm{n}_{\rm WN}.
     \label{eq:modello_residui}
 \end{equation}
 The first term accounts for the timing model. The timing model parameters are
@@ -73,7 +73,7 @@ Chapter~\ref{chpt:rumore}. The columns of $\bm{F}$ are the sines and cosines of
 Eq.~\eqref{eq:fourier}, multiplied by the chromatic factor of
 Eq.~\eqref{eq:chrom} for the chromatic processes, and $\bm{a}$ is the vector of
 the Fourier coefficients $a_k$ and $b_k$ of all the processes. The last term,
-$\bm{n}$, is the white noise. It is Gaussian with covariance matrix
+$\bm{n}_{\rm WN}$, is the white noise. It is Gaussian with covariance matrix
 $\bm{C}_{\rm WN}$, whose diagonal elements are the variances $\sigma_i^2$ of
 Eq.~\eqref{eq:sigma_wn}, while ECORR adds a correlation between the TOAs of
 the same LOFAR system observed at the same epoch.
@@ -152,40 +152,42 @@ contours enclosing $68\%$, $95\%$ and $99.7\%$ of the probability. The
 two-dimensional panels show the covariance between the parameters, and are
 therefore the main tool to identify degeneracies.
 
-\section{Model comparison} \label{sec:model_selection}
-
-To compare two models we use the evidence of Eq.~\eqref{eq:evidence}. The
-ratio of the evidences of two models is the Bayes factor,
-\begin{equation}
-    \mathcal{B}_{12} = \frac{\mathcal{Z}_1}{\mathcal{Z}_2},
-    \label{eq:bayes_factor}
-\end{equation}
-which tells how much the data favor model 1 over model 2, if the two models
-are considered equally probable before the measurement. Since the evidence is
-the likelihood averaged over the prior, a model with additional parameters is
-favored only if it fits the data better by an amount that compensates for its
-larger prior volume.
-
-The evidence is an integral over the whole parameter space, and it is not
-provided by the MCMC sampler. When one model is contained in the other,
-however, the Bayes factor can be obtained from the posterior alone. This is
-the case of the band noise. The model with band noise reduces to the model
-without it when the amplitude $A_{\rm BN}$ is negligible, which in practice
-corresponds to the lower bound of its prior, $\log_{10}A_{\rm BN} = -20$. The
-Bayes factor of the model without band noise over the model with band noise
-is then given by the Savage--Dickey density ratio,
-\begin{equation}
-    \mathcal{B} = \frac{p(\log_{10}A_{\rm BN} = -20\,|\,\delta\bm{t})}
-    {\pi(\log_{10}A_{\rm BN} = -20)},
-    \label{eq:savage_dickey}
-\end{equation}
-where the numerator is the marginalized posterior and the denominator is the
-prior, both evaluated in the model with band noise. If the data require the
-band noise, the posterior at the lower bound is smaller than the prior and
-$\mathcal{B} < 1$. If instead $\mathcal{B} \simeq 1$, the data cannot
-distinguish between the two models. We estimate the numerator from the
-fraction of samples in the lowest unit interval of the prior,
-$-20 < \log_{10}A_{\rm BN} < -19$.
+% ===== SEZIONE 4.4 COMMENTATA (11/11/2026): da rivalutare, forse va nel cap. 6 =====
+% \section{Model comparison} \label{sec:model_selection}
+%
+% To compare two models we use the evidence of Eq.~\eqref{eq:evidence}. The
+% ratio of the evidences of two models is the Bayes factor,
+% \begin{equation}
+%     \mathcal{B}_{12} = \frac{\mathcal{Z}_1}{\mathcal{Z}_2},
+%     \label{eq:bayes_factor}
+% \end{equation}
+% which tells how much the data favor model 1 over model 2, if the two models
+% are considered equally probable before the measurement. Since the evidence is
+% the likelihood averaged over the prior, a model with additional parameters is
+% favored only if it fits the data better by an amount that compensates for its
+% larger prior volume.
+%
+% The evidence is an integral over the whole parameter space, and it is not
+% provided by the MCMC sampler. When one model is contained in the other,
+% however, the Bayes factor can be obtained from the posterior alone. This is
+% the case of the band noise. The model with band noise reduces to the model
+% without it when the amplitude $A_{\rm BN}$ is negligible, which in practice
+% corresponds to the lower bound of its prior, $\log_{10}A_{\rm BN} = -20$. The
+% Bayes factor of the model without band noise over the model with band noise
+% is then given by the Savage--Dickey density ratio,
+% \begin{equation}
+%     \mathcal{B} = \frac{p(\log_{10}A_{\rm BN} = -20\,|\,\delta\bm{t})}
+%     {\pi(\log_{10}A_{\rm BN} = -20)},
+%     \label{eq:savage_dickey}
+% \end{equation}
+% where the numerator is the marginalized posterior and the denominator is the
+% prior, both evaluated in the model with band noise. If the data require the
+% band noise, the posterior at the lower bound is smaller than the prior and
+% $\mathcal{B} < 1$. If instead $\mathcal{B} \simeq 1$, the data cannot
+% distinguish between the two models. We estimate the numerator from the
+% fraction of samples in the lowest unit interval of the prior,
+% $-20 < \log_{10}A_{\rm BN} < -19$.
+% ===== FINE SEZIONE 4.4 COMMENTATA =====
 
 \section{Enterprise and Discovery} \label{sec:software}
 
@@ -204,7 +206,7 @@ processing units (GPUs). In this work we use only the first feature. The
 likelihood is compiled and evaluated on CPUs in double precision, and its
 gradient is not needed by the Metropolis--Hastings algorithm.
 
-In Chapter~\ref{chpt:validazione} we compare the posteriors obtained with the
+In Chapter~\ref{chpt:risultati} we compare the posteriors obtained with the
 two codes for the same model and the same priors. Since both analyses use
 \textsc{PTMCMCSampler}, the comparison is a test of the implementation of the
 likelihood. The autocorrelation times are computed with the \textsc{emcee}

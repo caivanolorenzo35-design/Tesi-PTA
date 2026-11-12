@@ -1,9 +1,9 @@
 % !TEX root = ../main.tex
 \chapter{The pulsar noise model} \label{chpt:rumore}
 
-The TOAs can be described as the sum of a deterministic contribution, given by
-the timing model introduced in Section~\ref{sec:timing}, and a stochastic
-contribution due to several noise processes~\cite{Lentati2016,Shaifullah2025}.
+As shown in Eq.~\eqref{eq:residuals}, besides a possible GWB, the timing
+residuals contain a stochastic contribution $n_i$ due to several noise
+processes~\cite{Lentati2016,Shaifullah2025}.
 In this chapter we describe these noise processes and the way they are modeled.
 Although they have different physical origins, they are all modeled as
 Gaussian processes.
@@ -30,8 +30,7 @@ truncated to $N$ frequencies~\cite{Taylor2021},
     \label{eq:fourier}
 \end{equation}
 where $T$ is the time span of the data. The lowest frequency is therefore
-$1/T$, while the number of components $N$ sets the highest one, $N/T$. Only
-low frequencies are needed, since red noise has most of its power there.
+$1/T$, while the number of components $N$ sets the highest one, $N/T$.
 
 The coefficients $a_k$ and $b_k$ are independent Gaussian random variables
 with zero mean, whose variance is fixed by the PSD of the process,
@@ -94,11 +93,6 @@ $\gamma_{\rm RN}$ is the spectral index. This PSD has the same functional form
 as the one of the GWB in Eq.~\eqref{eq:PSD_GWB}. As discussed in
 Section~\ref{sec:timingGW}, in a single pulsar the intrinsic red noise therefore
 cannot be distinguished from the GWB.
-
-The inferred parameters of the intrinsic red noise also depend on how the other
-noise processes are modeled. For example, NANOGrav and PPTA, which describe the
-DM variations with different methods, find slightly different spin noise
-parameters for the pulsars observed by both arrays~\cite{Shaifullah2025}.
 
 \section{Chromatic red noise} \label{sec:chrom}
 
@@ -177,21 +171,7 @@ thin screen with inhomogeneities of the same size gives $\alpha = 4$, which is
 the value adopted for the DR2low dataset, while an extended medium with
 Kolmogorov turbulence gives $\alpha = 4.4$~\cite{Iraci2025}. In this work we use $\alpha = 4$ as
 the reference model, and we study the effect of $\alpha = 4.4$ and of a free
-chromatic index in Chapter~\ref{chpt:degenerazioni}.
-
-\subsection{Other chromatic noise processes} \label{sec:altri_chrom}
-
-DM variations and scattering are not the only chromatic effects in pulsar
-timing. The solar wind adds a further contribution to the DM, which is largest
-when the line of sight passes close to the Sun and therefore varies along the
-year. Other effects include sudden chromatic events, such as exponential dips
-in the residuals, and additional delays caused by refraction in the
-ISM~\cite{Shaifullah2025,Iraci2025}. For
-PSR~J1640+2224, which lies far from the ecliptic plane, the solar wind is
-described only by a deterministic term in the timing model~\cite{Iraci2025}, and none of these
-processes is included in the noise model. The only additional noise process
-considered in this work is the band noise, discussed in Section~\ref{sec:bn}.
-
+chromatic index in Chapter~\ref{chpt:risultati}.
 
 \section{Band noise} \label{sec:bn}
 
@@ -209,7 +189,7 @@ frequency-dependent calibration errors, which can remain correlated over
 hundreds of days, or by radio frequency interference (RFI) present in the same
 band at different sites. RFI, however, is expected to be mostly uncorrelated
 between observations, and in that case it is absorbed by the white noise
-parameters. In the first IPTA data release, band noise was detected in four
+parameters~\cite{Lentati2016}. In the first IPTA data release, band noise was detected in four
 pulsars, with amplitudes $\log_{10}A_{\rm BN}$ between about $-14$ and $-12$
 and spectral indices $\gamma_{\rm BN}$ between about $0.6$ and
 $3.3$~\cite{Lentati2016}.
@@ -221,10 +201,7 @@ instrumental effects or calibration errors. If a band contains only one
 system, the two models act on exactly the same TOAs and are completely
 covariant, so that the data cannot distinguish between them. When several
 systems observe in the same band, as for the seven LOFAR systems used here, a
-noise process common to all of them can instead be attributed to the band. For
-this reason, low-frequency observations such as those of LOFAR, together with
-wide-band receivers, are particularly useful to identify band-dependent
-effects~\cite{Lentati2016}.
+noise process common to all of them can instead be attributed to the band.
 
 The band noise is modeled as a power law of the same form as
 Eq.~\eqref{eq:PSD_RN}, with amplitude $A_{\rm BN}$ and spectral index
@@ -244,7 +221,7 @@ scattering variations with $\alpha = 4$. The white noise parameters are fixed,
 with an EFAC and an EQUAD for each of the 13 observing systems and an ECORR for
 each of the seven LOFAR systems, so that the free parameters are the six
 amplitudes and spectral indices of the three red noise processes. In
-Chapter~\ref{chpt:degenerazioni} we also consider three variants of this
+Chapter~\ref{chpt:risultati} we also consider three variants of this
 model, one with $\alpha = 4.4$, one in which $\alpha$ is a free parameter, and
 one that includes the band noise of Section~\ref{sec:bn}. The number of
 Fourier components and the priors of each process are given in
