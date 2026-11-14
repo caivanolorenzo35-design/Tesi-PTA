@@ -13,7 +13,8 @@ sample the posterior distribution.
 In Bayesian inference, the result of a measurement is the posterior
 distribution $p(\bm{\theta}|\delta\bm{t})$, that is, the probability density
 of the model parameters $\bm{\theta}$ given the data, which in our case are the
-timing residuals $\delta\bm{t}$. The posterior is given by Bayes' theorem,
+timing residuals $\delta\bm{t}$. The posterior is given by Bayes'
+theorem~\cite{ThraneTalbot2019},
 \begin{equation}
     p(\bm{\theta}|\delta\bm{t}) =
     \frac{\mathcal{L}(\delta\bm{t}|\bm{\theta})\,\pi(\bm{\theta})}{\mathcal{Z}},
@@ -57,7 +58,7 @@ over one of them broadens the posterior of the other.
 \section{The pulsar timing likelihood} \label{sec:likelihood}
 
 To write the likelihood we need a model for the timing residuals. We write
-them as the sum of three contributions,
+them as the sum of three contributions~\cite{Taylor2021},
 \begin{equation}
     \delta\bm{t} = \bm{M}\bm{\epsilon} + \bm{F}\bm{a} + \bm{n}_{\rm WN}.
     \label{eq:modello_residui}
@@ -112,7 +113,8 @@ parameters.
 
 The posterior of Eq.~\eqref{eq:bayes} cannot be computed analytically, and
 evaluating it on a grid becomes too expensive as the number of parameters
-grows. We therefore use a Markov chain Monte Carlo (MCMC) method, which
+grows. We therefore use a Markov chain Monte Carlo (MCMC)
+method~\cite{Taylor2021}, which
 produces a chain of samples of $\bm{\theta}$ distributed according to the
 posterior. The marginalized posterior of a parameter is then simply the
 histogram of its samples.
@@ -193,7 +195,7 @@ therefore the main tool to identify degeneracies.
 
 The likelihood of Eq.~\eqref{eq:likelihood} is implemented in
 \textsc{Enterprise}, the software commonly used in PTA analyses, which was
-also used for the noise analysis of the DR2low dataset. It is written in
+also used for the noise analysis of the DR2low dataset~\cite{Iraci2025}. It is written in
 Python and relies on the NumPy and SciPy libraries for its linear algebra
 operations. \textsc{Discovery} is a more recent package that implements the
 same likelihood with the JAX library.

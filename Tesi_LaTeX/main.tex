@@ -104,14 +104,36 @@
         {\large{\bf Supervisor:\\ Prof. Alberto Sesana}}\\[4mm]
         {\large{\bf Co-supervisor:\\ Dr. Irene Ferranti}}
     \end{minipage}\hfill\begin{minipage}[t]{0.47\textwidth}\raggedleft
-        {\large{\bf Candidate:\\ Lorenzo Caivano\\ Student ID: XXXXXX}} % <-- inserisci la tua matricola
+        {\large{\bf Candidate:\\ Lorenzo Caivano\\ Student ID: 889490}} % <-- inserisci la tua matricola
     \end{minipage}
     }
 
     \vfill
     \centering{\large{\bf ACADEMIC YEAR 2025/2026}}
 \end{titlepage}
+\chapter*{Abstract}
 
+Pulsar timing arrays search for a stochastic gravitational wave background
+(GWB) at nanohertz frequencies by monitoring the times of arrival of the
+pulses of millisecond pulsars. The detection of the GWB requires an
+accurate model of the noise of each pulsar, whose components can be
+degenerate with one another. In this thesis we study the noise of
+PSR~J1640+2224 in the DR2low dataset, which combines the second data
+release of the European Pulsar Timing Array with low-frequency
+observations of LOFAR. The analysis is performed with \textsc{Discovery},
+a recent code based on JAX, which we first validate against
+\textsc{Enterprise}. The posterior of the DM variations has two peaks, and
+the contours between the DM and the scattering parameters are L-shaped,
+the sign of a degeneracy between the two chromatic processes. This
+structure remains when the chromatic index of the scattering variations is
+left free and when a band noise is added to the model. We then analyze
+simulated datasets. When the data contain only the processes of the model
+the degeneracy does not appear, so it is not due to the frequency coverage
+of the data. An unmodeled GWB and an unmodeled band noise in the LOFAR
+band bias the intrinsic red noise and the DM variations respectively, and
+the band noise can remain undetected. None of the simulations however
+reproduces the whole structure observed in the real data, whose origin
+remains open.
 %----------------------------------------------------------------------------------------
 %	INDICE
 %----------------------------------------------------------------------------------------
@@ -123,7 +145,7 @@
 \mainmatter
 \pagestyle{thesis}
 
-\include{Capitoli/Introduzione}
+%\include{Capitoli/Introduzione}
 \include{Capitoli/Capitolo1_OndeGravitazionali}
 \include{Capitoli/Capitolo2_PTA}
 \include{Capitoli/Capitolo3_Rumore}
