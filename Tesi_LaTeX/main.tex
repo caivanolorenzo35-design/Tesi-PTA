@@ -113,27 +113,76 @@
 \end{titlepage}
 \chapter*{Abstract}
 
-Pulsar timing arrays search for a stochastic gravitational wave background
-(GWB) at nanohertz frequencies by monitoring the times of arrival of the
-pulses of millisecond pulsars. The detection of the GWB requires an
-accurate model of the noise of each pulsar, whose components can be
-degenerate with one another. In this thesis we study the noise of
-PSR~J1640+2224 in the DR2low dataset, which combines the second data
-release of the European Pulsar Timing Array with low-frequency
-observations of LOFAR. The analysis is performed with \textsc{Discovery},
-a recent code based on JAX, which we first validate against
-\textsc{Enterprise}. The posterior of the DM variations has two peaks, and
-the contours between the DM and the scattering parameters are L-shaped,
-the sign of a degeneracy between the two chromatic processes. This
-structure remains when the chromatic index of the scattering variations is
-left free and when a band noise is added to the model. We then analyze
-simulated datasets. When the data contain only the processes of the model
-the degeneracy does not appear, so it is not due to the frequency coverage
-of the data. An unmodeled GWB and an unmodeled band noise in the LOFAR
-band bias the intrinsic red noise and the DM variations respectively, and
-the band noise can remain undetected. None of the simulations however
-reproduces the whole structure observed in the real data, whose origin
-remains open.
+Millisecond pulsars (MSPs) are rapidly rotating neutron stars that emit
+radio pulses with a regularity comparable to that of atomic clocks. A
+gravitational wave crossing the space between the Earth and a pulsar
+perturbs the travel time of the pulses, which arrive slightly earlier or
+later than predicted. By monitoring for decades the times of arrival
+(TOAs) of the pulses from a set of pulsars, a pulsar timing array (PTA),
+it is therefore possible to observe gravitational waves with frequencies
+of the order of nanohertz.
+
+In this band the main expected source is the stochastic gravitational wave
+background (GWB), produced by the incoherent superposition of the signals
+emitted by the population of supermassive black hole binaries. The GWB
+appears as a low-frequency signal common to all pulsars and correlated
+among them in a characteristic way. In 2023 several collaborations,
+including the European Pulsar Timing Array (EPTA), reported first evidence
+for it.
+
+The detection of the GWB is made difficult by the noise sources that
+affect the TOAs. These are the irregularities in the rotation of the
+pulsar (intrinsic red noise), the variations of the electron density along
+the line of sight (dispersion measure, DM, variations) and the variations
+of the scattering of the pulses in the interstellar medium. These
+processes produce a red noise in the timing residuals, with more power at
+low frequencies, described by the same power-law spectrum as the GWB. The
+intrinsic red noise is achromatic, while the DM and scattering variations
+are chromatic, since their amplitude depends on the radio frequency of the
+observation. In a single pulsar the GWB is therefore hard to distinguish
+from the noise, and the components of the noise model can be degenerate
+with one another. An accurate noise model is thus essential for the search
+for the GWB.
+
+In this thesis we study the degeneracies among the parameters of the noise
+model of a single pulsar, PSR~J1640+2224, in the DR2low dataset, which
+combines the second data release of the EPTA with low-frequency
+observations of LOFAR. The noise model has six free parameters, an
+amplitude and a spectral index for each of the three processes. The
+analysis is performed with \textsc{Discovery}, a recent code based on JAX,
+and we first verify that it gives the same posterior distributions as
+\textsc{Enterprise}, the reference code of the community. The comparison
+with the dataset without the LOFAR observations shows that the
+low-frequency data are necessary to constrain the chromatic noise. With
+DR2low the posterior of the DM parameters has two peaks, and the contours
+between the DM and the scattering parameters are L-shaped, the sign of a
+degeneracy between the two chromatic processes. This structure does not
+disappear if the chromatic index of the scattering variations is left
+free, or if a band noise, a red process that acts only on the TOAs of the
+LOFAR band, is added to the model. The band noise is not detected, and
+only an upper limit on its amplitude is obtained.
+
+To understand the origin of this structure we analyze simulated datasets
+with the same characteristics as the real data. When the simulated data
+contain only the three processes of the model, the injected parameters are
+recovered and the degeneracy does not appear, so the frequency coverage of
+DR2low is sufficient to distinguish the two chromatic processes. We then
+inject processes that are not included in the model. A GWB with the
+amplitudes measured by the PTA collaborations produces only weak L-shaped
+tails in the contours between the DM and the scattering parameters, while
+a stronger GWB is absorbed by the intrinsic red noise. A band noise biases
+the DM parameters toward higher amplitudes and lower spectral indices, in
+the region of the high-amplitude peak of the real data. Because of the
+large uncertainties of the LOFAR TOAs, this band noise is not detected
+when it is added to the model, and the upper limit obtained from the real
+data is similar to the one obtained from the simulation. The presence of
+band noise in the real data therefore cannot be excluded.
+
+None of the simulations reproduces the whole structure observed in the
+real data, whose origin remains open. These results show that a process
+that is present in the data but not in the model can bias the parameters
+of the other noise components, and that an accurate noise model for each
+pulsar is an essential step in the search for the GWB.
 %----------------------------------------------------------------------------------------
 %	INDICE
 %----------------------------------------------------------------------------------------
