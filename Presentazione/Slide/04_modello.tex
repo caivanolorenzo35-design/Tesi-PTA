@@ -1,0 +1,30 @@
+% !TEX root = ../main.tex
+%--- Slide 4: il modello di rumore (circa 1 min 15 s) ------------------------------------
+\begin{frame}{Il modello di rumore}
+  \begin{itemize}
+    \item \textbf{White noise}: spettro piatto, errori indipendenti da un TOA all'altro (fissato)
+    \item \textbf{Rumore rosso}: fluttuazioni correlate nel tempo, con più potenza
+          alle basse frequenze: derive lente dei residui
+    \item Densità spettrale a legge di potenza:
+          $S(f) \propto A^2 \left(f/\fyr\right)^{-\gamma}$\\
+          $A$: ampiezza alla frequenza $\fyr = 1/\text{anno}$ \quad
+          $\gamma$: quanto la potenza è concentrata a bassa frequenza
+  \end{itemize}
+  \vspace{2mm}
+  \centering
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{lll}
+    \toprule
+    Processo & Origine & Dipendenza da $\nu$ radio \\
+    \midrule
+    Red noise intrinseco (RN) & rotazione della pulsar & acromatico \\
+    Variazioni di DM          & densità di elettroni & $\propto \nu^{-2}$ \\
+    Variazioni di scattering (SV) & mezzo interstellare & $\propto \nu^{-\alpha}$, \ $\alpha = 4$ \\
+    \bottomrule
+  \end{tabular}
+  \vspace{2mm}
+  \begin{itemize}
+    \item Modello di riferimento: \textbf{6 parametri liberi}
+    \item Il GWB, in una singola pulsar, è un altro rumore rosso acromatico
+  \end{itemize}
+\end{frame}

@@ -1,0 +1,97 @@
+%========================================================================================
+%  PRESENTAZIONE DI LAUREA — Lorenzo Caivano
+%  File principale: compila SEMPRE questo file (VS Code + LaTeX Workshop).
+%  Le slide stanno nei file della cartella Slide/ — qui ci sono solo impostazioni
+%  e l'elenco delle slide.
+%  Le figure sono prese direttamente da ../Tesi_LaTeX/Figure (nessuna copia):
+%  il PDF finale le contiene già, quindi sulla chiavetta basta main.pdf.
+%========================================================================================
+
+\documentclass[aspectratio=169, 11pt]{beamer}
+% aspectratio=169 -> formato 16:9  (per 4:3 togli l'opzione)
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}          % font vettoriali, inclusi nel PDF
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}         % tabelle con \toprule, \midrule, \bottomrule
+\usepackage{appendixnumberbeamer} % le slide di riserva non contano nel totale
+
+% Cartella delle figure: si usano quelle della tesi, senza copiarle
+\graphicspath{{../Tesi_LaTeX/}}
+
+%----------------------------------------------------------------------------------------
+%	COLORI (gli stessi delle figure della tesi)
+%----------------------------------------------------------------------------------------
+\definecolor{reali}{HTML}{2E86AB}      % dati reali (blu)
+\definecolor{simul}{HTML}{F4A261}      % simulazioni (arancione)
+\definecolor{simdue}{HTML}{6A4C93}     % seconda simulazione (viola)
+\definecolor{enterprise}{HTML}{C73E1D} % Enterprise / DR2new+ (rosso)
+\definecolor{grigio}{HTML}{555555}
+
+%----------------------------------------------------------------------------------------
+%	TEMA: semplice, senza fronzoli
+%----------------------------------------------------------------------------------------
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}            % niente icone di navigazione
+\setbeamercolor{frametitle}{fg=reali}
+\setbeamercolor{title}{fg=reali}
+\setbeamercolor{structure}{fg=reali}
+\setbeamercolor{normal text}{fg=black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{footline}{%
+  \hfill{\color{grigio}\scriptsize\insertframenumber\,/\,\inserttotalframenumber}\hspace{4mm}\vspace{3mm}}
+
+%----------------------------------------------------------------------------------------
+%	SCORCIATOIE (come nella tesi)
+%----------------------------------------------------------------------------------------
+\newcommand{\Agwb}{A_{\mathrm{GWB}}}
+\newcommand{\gammagwb}{\gamma_{\mathrm{GWB}}}
+\newcommand{\fyr}{f_{\mathrm{yr}}}
+\newcommand{\reali}[1]{\textcolor{reali}{#1}}
+\newcommand{\simul}[1]{\textcolor{simul}{#1}}
+
+% Ritagli dei corner plot a 6 parametri (figure 8x8 pollici, ordine dei parametri:
+% gamma_DM, logA_DM, gamma_RN, logA_RN, gamma_SV, logA_SV).
+% trim = sinistra basso destra alto (in pt). Se un ritaglio non ti convince, cambia
+% questi numeri: valgono per tutte le slide.
+%   \cornerDMSV : blocco 2x2 in basso a sinistra (DM contro scattering)
+%   \cornerDM   : blocco 2x2 in alto a sinistra (istogramma di gamma_DM e piano A_DM-gamma_DM)
+\newcommand{\cornerDMSV}[2][height=0.75\textheight]{%
+  \includegraphics[#1, trim=0 0 362 348, clip]{#2}}
+\newcommand{\cornerDM}[2][height=0.75\textheight]{%
+  \includegraphics[#1, trim=0 396 362 0, clip]{#2}}
+
+%----------------------------------------------------------------------------------------
+%	TITOLO
+%----------------------------------------------------------------------------------------
+\title{Studio delle degenerazioni\\nell'analisi del rumore delle pulsar}
+\author{Lorenzo Caivano}
+\institute{Università degli Studi di Milano-Bicocca\\
+           Corso di Laurea in Fisica}
+\date{Relatore: Prof.\ Alberto Sesana \quad Correlatrice: Dott.ssa Irene Ferranti}
+
+%========================================================================================
+\begin{document}
+
+\input{Slide/01_titolo}
+\input{Slide/02_pta}
+\input{Slide/03_modello}
+\input{Slide/04_residui}
+\input{Slide/05_metodo_lofar}
+\input{Slide/06_degenerazione}
+\input{Slide/07_modelli_estesi}
+\input{Slide/08_sim_riferimento}
+\input{Slide/09_non_modellati}
+\input{Slide/10_rivelabilita}
+\input{Slide/11_conclusioni}
+
+% Slide di riserva per le domande (dopo le conclusioni, non contano nei 10 minuti)
+% (tolte per la versione da mandare a Irene: per rimetterle togli i % qui sotto)
+%\appendix
+%\input{Slide/12_riserva}
+
+\end{document}

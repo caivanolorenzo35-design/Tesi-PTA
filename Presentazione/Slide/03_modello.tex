@@ -1,0 +1,30 @@
+% !TEX root = ../main.tex
+%--- Slide 3: il modello di rumore (circa 1 min 15 s) ------------------------------------
+\begin{frame}{Il modello di rumore}
+  \small
+  \begin{itemize}\setlength{\itemsep}{2pt}
+    \item \textbf{White noise}: errori di misura indipendenti da un TOA all'altro (fissato)
+    \item \textbf{Rumori rossi}: processi stocastici a legge di potenza come il GWB ($A$, $\gamma$):
+          potenza alle basse frequenze, cioè variazioni lente, su scale di anni
+  \end{itemize}
+  \vspace{2mm}
+  \centering
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lllc}
+    \toprule
+    Processo & Origine & Tipo & Ritardo $\propto$ \\
+    \midrule
+    GWB                       & onde gravitazionali   & acromatico & $\nu^{0}$ \\
+    Red noise intrinseco (RN) & rotazione della pulsar & acromatico & $\nu^{0}$ \\
+    Variazioni di DM          & elettroni liberi & \textbf{cromatico} & $\nu^{-2}$ \\
+    Variazioni di scattering (SV) & mezzo interstellare & \textbf{cromatico} & $\nu^{-4}$ \\
+    \bottomrule
+  \end{tabular}
+  \vspace{2mm}
+  \begin{itemize}\setlength{\itemsep}{2pt}
+    \item \textbf{Cromatico}: il ritardo cresce a bassa frequenza radio $\nu$:
+          per separarli servono osservazioni a più frequenze
+    \item GWB e RN hanno la stessa firma acromatica: in una singola pulsar non si distinguono
+    \item Modello di riferimento: RN + DM + SV, \textbf{6 parametri liberi}
+  \end{itemize}
+\end{frame}
